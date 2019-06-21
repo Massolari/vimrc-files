@@ -317,6 +317,9 @@ endif
 " Pasta para snippets
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 
+" Impedir que caracteres sejam escondidos em arquivos markdown
+let g:indentLine_fileTypeExclude = ['markdown']
+
 "*****************************************************************************
 "" Comandos
 "*****************************************************************************
