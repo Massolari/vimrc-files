@@ -4,7 +4,7 @@
 
 A maneira mais fácil de começar com o Vim no Linux é baixar o arquivo `.appimage` e executar o Vim a partir dele. 
 
-- Acesse o link (de releases do Neovim)[https://github.com/neovim/neovim/releases]
+- Acesse o link [de releases do Neovim](https://github.com/neovim/neovim/releases)
 - Procure por `assets`
 - Baixe o arquivo `nvim.appimage`
 - Abra o terminal e navegue até onde você salvou o arquivo
