@@ -110,3 +110,6 @@ Plug 'liuchengxu/vim-which-key'
 
 " Exibir barra de registradores
 Plug 'junegunn/vim-peekaboo'
+
+" Requisições REST
+Plug 'diepm/vim-rest-console'
