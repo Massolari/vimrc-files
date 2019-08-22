@@ -38,7 +38,7 @@ O Vim irá instalar todos os plugins e carregar as configurações, após ele te
 
 ## Introdução
 
-O Vim não é um editor comum, que vocẽ abre e já consegue começar a trabalhar, por conta disso ele assusta muita gente no começo, porém, com o tempo, você vai perceber que editar arquivos com o Vim é mais eficiente e ele é uma ferramenta muito poderosa.
+O Vim não é um editor comum, que você abre e já consegue começar a trabalhar, por conta disso ele assusta muita gente no começo, porém, com o tempo, você vai perceber que editar arquivos com o Vim é mais eficiente e ele é uma ferramenta muito poderosa.
 
 O Vim é um editor *modal*, isso significa que ele possui **modos**. Enquanto você estiver editando arquivos com o Vim você vai ficar alternando entre esses modos. De forma simplificada os modos são:
 
