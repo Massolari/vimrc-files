@@ -1,5 +1,13 @@
 # Guia básico do VIM
 
+## Índice
+
+- [Instação](#instalação)
+- [Introdução](#introdução)
+- [Comandos básicos para sobreviver](#comandos-básicos-para-sobreviver)
+    - [Movimentos básicos](#movimentos-básicos)
+    - [Abrindo arquivos](#abrindo-arquivos)
+
 ## Instalação
 
 A maneira mais fácil de começar com o Vim no Linux é baixar o arquivo `.appimage` e executar o Vim a partir dele. 
