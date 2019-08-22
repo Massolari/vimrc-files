@@ -63,9 +63,6 @@ endif
 " Cursores múltiplos
 Plug 'terryma/vim-multiple-cursors'
 
-" Syntax para arquivos vue
-Plug 'posva/vim-vue'
-
 " Se mover melhor com o f/t
 Plug 'unblevable/quick-scope'
 

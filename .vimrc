@@ -174,7 +174,7 @@ set number relativenumber
 set laststatus=2
 
 " Desabilitar LSP do ALE
-let g:ale_disable_lsp=1
+let g:ale_disable_lsp=0
 
 " Branch do git na statusbar
 let g:lightline = {
@@ -198,7 +198,7 @@ let g:vista#executives = ['coc']
 let g:vista#renderer#enable_icon = 1
 
 " Extensões do coc
-let g:coc_global_extensions = ['coc-phpls', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-vimtex', 'coc-yaml']
+let g:coc_global_extensions = ['coc-phpls', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-vimtex', 'coc-yaml', 'coc-vetur', 'coc-css']
 
 " Configuração do which-key
 call which_key#register('<Space>', "g:which_key_map")
@@ -410,14 +410,23 @@ augroup END
 set autoread
 
 " Corrigir sintaxe nos arquivos .vue
-autocmd FileType vue syntax sync fromstart
+augroup vue-syntax
+    autocmd!
+    autocmd FileType vue syntax sync fromstart
+augroup END
 
 " Configuração de comentário para twig
-autocmd FileType html.twig setlocal commentstring={#\ %s\ #}
+augroup twig-comment
+    autocmd!
+    autocmd FileType html.twig setlocal commentstring={#\ %s\ #}
+augroup END
 
 " Insere o 'use' de classes em arquivos php
 " autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
-autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
+augroup php-autoimport
+    autocmd!
+    autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
+augroup END
 
 " Sempre que entrar na janela de quickfix retirar o mapeamento customizado do Enter
 augroup enable-cr-quickfix
@@ -437,6 +446,12 @@ augroup numbertoggle
     autocmd!
     autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
     autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
+" Desabilita conceal (esconder textos) em arquivos markdown
+augroup markdown-noindent
+    autocmd!
+    autocmd FileType markdown setlocal conceallevel=0
 augroup END
 "*****************************************************************************
 "" Mapeamentos
@@ -485,6 +500,7 @@ nnoremap <leader>sc :CloseSession<CR>
 " Git
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gl :Gpull<CR>
 nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>gs :Gstatus<CR>
