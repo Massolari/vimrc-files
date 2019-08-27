@@ -53,7 +53,7 @@ Plug 'cohama/lexima.vim'
 Plug 'tpope/vim-surround'
 
 " Autocomplete
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Habilita o uso do % em tags HTML/XML, if/else entre outros blocos
 if !has('nvim')
