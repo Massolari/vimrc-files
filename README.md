@@ -23,8 +23,8 @@ A partir de agora você pode executar o Vim, a partir do terminal, digitando `nv
 
 - Clone esse repositório para onde achar melhor
 - Abra o terminal e navegue até a pasta do repositório
-- Crie um link simbólico do arquivo `.vimrc` para a sua home executando `ln -s .vimrc ~/`
-- Crie um link simbólico do arquivo `.vimrc.bundles` para a sua home executando `ln -s .vimrc.bundles ~/`
+- Crie um link simbólico do arquivo `.vimrc` para a sua home executando `ln -s $PWD/.vimrc ~/`
+- Crie um link simbólico do arquivo `.vimrc.bundles` para a sua home executando `ln -s $PWD/.vimrc.bundles ~/`
 - Crie um arquivo com o nome `init.vim` na pasta `~/.config/nvim/`
 - Cole o código a seguir dentro desse arquivo e salve-o:
 ```
