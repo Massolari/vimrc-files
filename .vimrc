@@ -154,7 +154,7 @@ set spelllang=pt
 set hidden
 
 " Disable the blinking cursor.
-set gcr=a:blinkon0
+set gcr+=a:blinkon0
 
 " Número mínimo de linha que deverão ser mostradas antes e depois do cursor
 set scrolloff=5
