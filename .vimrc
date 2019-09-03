@@ -188,7 +188,9 @@ let g:ale_disable_lsp=0
 " Configurações para o ALE embelezar o código
 let g:ale_fixers = {
 \   'php': [ 'phpcbf' ],
-\   'typescript': [ 'tslint' ]
+\   'typescript': [ 'tslint' ],
+\   'sql': [ 'pgformatter' ],
+\   'javascript': [ 'eslint' ],
 \ }
 
 " Embelezar o código ao salvar
