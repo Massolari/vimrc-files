@@ -185,6 +185,14 @@ set laststatus=2
 " Desabilitar LSP do ALE
 let g:ale_disable_lsp=0
 
+" Configurações para o ALE embelezar o código
+let g:ale_fixers = {
+\   'php': [ 'phpcbf' ]
+\ }
+
+" Embelezar o código ao salvar
+let g:ale_fix_on_save=1
+
 " Branch do git na statusbar
 let g:lightline = {
             \     'active': {
