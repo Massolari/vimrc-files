@@ -196,7 +196,7 @@ let g:ale_fix_on_save=1
 " Branch do git na statusbar
 let g:lightline = {
             \     'active': {
-            \         'left': [ ['mode', 'paste'], ['gitbranch', 'cocstatus', 'readonly', 'absolutepath', 'modified', 'method'] ]
+            \         'left': [ ['mode', 'paste'], ['gitbranch', 'cocstatus', 'method', 'readonly', 'absolutepath', 'modified'] ]
             \ },
             \     'component_function': {
             \         'gitbranch': 'fugitive#head',
@@ -504,7 +504,7 @@ function! s:show_documentation()
   if &filetype == 'vim'
     execute 'h '.expand('<cword>')
   else
-    call CocActionAsync('doHover')
+    call CocAction('doHover')
   endif
 endfunction
 
