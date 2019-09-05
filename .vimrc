@@ -280,6 +280,11 @@ let g:which_key_map.s = {
       \ 'o' : 'Abrir',
       \ 's' : 'Salvar',
       \ }
+let g:which_key_map.t = {
+      \ 'name' : '+Terminal',
+      \ 'h' : 'Abrir horizontalmente',
+      \ 'v' : 'Abrir verticalmente',
+      \ }
 let g:which_key_map.u = 'importar-classe-php'
 let g:which_key_map.v = 'dividir-tela-verticalmente'
 let g:which_key_map.w = {
@@ -529,6 +534,10 @@ nnoremap <leader>gw :Gwrite<CR>
 " Dividir a tela mais rapidamente
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
+
+" Abrir terminal em tela dividida
+nnoremap <leader>th :below split +te<CR>
+nnoremap <leader>tv :below vsplit +te<CR>
 
 " Toda a vez que pular para próxima palavra buscada o cursor fica no centro da tela
 nnoremap n nzzzv
