@@ -490,6 +490,12 @@ tnoremap kj <C-\><C-n>
 cnoremap <C-k> <up>
 cnoremap <C-j> <down>
 
+" Mover no modo insert sem as setas
+inoremap <C-h> <left>
+inoremap <C-j> <down>
+inoremap <C-k> <up>
+inoremap <C-l> <right>
+
 " Mapeamentos do coc
 " Abrir outline (ir para função/método) do coc
 nnoremap <silent> <leader>co  :<C-u>Vista finder coc<cr>
