@@ -193,6 +193,9 @@ let g:ale_fixers = {
 \   'javascript': [ 'eslint' ],
 \ }
 
+" Desabilitar eslint para typescript, usando tslint
+let g:ale_linters_ignore = {'typescript': ['eslint']}
+
 " Embelezar o código ao salvar
 let g:ale_fix_on_save=1
 
@@ -491,7 +494,7 @@ cnoremap <C-k> <up>
 cnoremap <C-j> <down>
 
 " Mover no modo insert sem as setas
-inoremap <C-h> <left>
+inoremap <C-b> <left>
 inoremap <C-j> <down>
 inoremap <C-k> <up>
 inoremap <C-l> <right>
