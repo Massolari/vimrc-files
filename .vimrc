@@ -23,9 +23,14 @@ endif
 " Required:
 call plug#begin(expand('~/.vim/plugged'))
 
-"" Include user's extra bundle
+" Arquivo de plugins
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
+endif
+
+" Arquivo de plugins do usuário
+if filereadable(expand("~/.myvimrc.bundles"))
+  source ~/.myvimrc.bundles
 endif
 
 call plug#end()
@@ -667,3 +672,12 @@ nnoremap <leader>ldn :r !date +\%d/\%b/\%Y\(\%Y\-\%m\-\%d\)\ \(\%A\)<CR>
 
 " Inserir data de amanhã
 nnoremap <leader>ldt :r !date +\%d/\%b/\%Y\(\%Y\-\%m\-\%d\)\ \(\%A\) --date='tomorrow'<CR>
+
+"*****************************************************************************
+"" Source do arquivo do usuário
+"*****************************************************************************
+
+" Arquivo de plugins do usuário
+if filereadable(expand("~/.myvimrc"))
+  source ~/.myvimrc
+endif
