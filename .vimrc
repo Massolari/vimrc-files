@@ -29,8 +29,8 @@ if filereadable(expand("~/.vimrc.bundles"))
 endif
 
 " Arquivo de plugins do usuário
-if filereadable(expand("~/.myvimrc.bundles"))
-  source ~/.myvimrc.bundles
+if filereadable(expand("~/.vim/myvimrc.bundles"))
+  source ~/.vim/myvimrc.bundles
 endif
 
 call plug#end()
@@ -678,6 +678,6 @@ nnoremap <leader>ldt :r !date +\%d/\%b/\%Y\(\%Y\-\%m\-\%d\)\ \(\%A\) --date='tom
 "*****************************************************************************
 
 " Arquivo de plugins do usuário
-if filereadable(expand("~/.myvimrc"))
-  source ~/.myvimrc
+if filereadable(expand("~/.vim/.myvimrc"))
+  source ~/.vim/.myvimrc
 endif
