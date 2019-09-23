@@ -509,7 +509,7 @@ inoremap <C-l> <right>
 
 " Mapeamentos do coc
 " Abrir outline (ir para função/método) do coc
-nnoremap <silent> <leader>co  :<C-u>Vista finder coc<cr>
+nnoremap <silent> <leader>co :<C-u>CocList outline<cr>
 " Renomear variaveis
 nmap <silent> <leader>cr <Plug>(coc-rename)
 " Use `[c` and `]c` for navigate diagnostics
