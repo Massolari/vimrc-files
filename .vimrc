@@ -125,7 +125,7 @@ let g:vue_disable_pre_processors=1
 
 " Configuração do vdebug
 let g:vdebug_options = {
-\   "path_maps" : {"/var/www/html": "/home/douglasmassolari/GP"},
+\   "path_maps" : {"/var/www/html": "/home/douglasmassolari/PCP"},
 \   "server" : '172.17.0.1',
 \   "port" : 9001
 \}
@@ -272,6 +272,8 @@ let g:which_key_map.o = {
       \ 'name' : '+Abrir arquivos do vim',
       \ 'v' : 'Abrir .vimrc',
       \ 'b' : 'Abrir .vimrc.bundles',
+      \ 'm' : 'Abrir .myvimrc',
+      \ 'u' : 'Abrir .myvimrc.bundles',
       \ 's' : 'Atualizar (source) configurações do vim',
       \ }
 let g:which_key_map.p = {
@@ -657,8 +659,14 @@ noremap <leader>, mpA,<Esc>`p
 " Abrir configurações do vim
 nnoremap <leader>ov :e ~/.vimrc<CR>
 
+" Abrir configurações do vim personalizadas
+nnoremap <leader>om :e ~/.vim/.myvimrc<CR>
+
 " Abrir configurações de plugins do vim
 nnoremap <leader>ob :e ~/.vimrc.bundles<CR>
+
+" Abrir configurações de plugins do vim
+nnoremap <leader>ou :e ~/.vim/.myvimrc.bundles<CR>
 
 " Atualizar configurações do nvim
 nnoremap <leader>os :source ~/.config/nvim/init.vim<CR>
