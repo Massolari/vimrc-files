@@ -29,8 +29,8 @@ if filereadable(expand("~/.vimrc.bundles"))
 endif
 
 " Arquivo de plugins do usuário
-if filereadable(expand("~/.vim/myvimrc.bundles"))
-  source ~/.vim/myvimrc.bundles
+if filereadable(expand("~/.vim/.myvimrc.bundles"))
+  source ~/.vim/.myvimrc.bundles
 endif
 
 call plug#end()
