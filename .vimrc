@@ -577,7 +577,7 @@ nnoremap <leader>ba ggVG
 nnoremap <silent> <leader>bb :Buffers<CR>
 
 " Fechar buffer atual
-noremap <leader>bd :bd<CR>
+noremap <leader>bd :bp\|bd #<CR>
 
 " Salvar mais rapidamente
 nnoremap <leader>bs :w<CR>
