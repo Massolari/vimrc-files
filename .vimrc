@@ -570,6 +570,18 @@ nnoremap <F2> :NERDTreeFind<CR>
 imap jk <Esc>
 imap kj <Esc>
 
+" Abrir uma nova aba
+nnoremap <leader>aa :tabnew<CR>
+
+" Ir para a aba seguinte
+nnoremap <leader>an :tabnext<CR>
+
+" Ir para a aba anterior
+nnoremap <leader>ap :tabprevious<CR>
+
+" Fechar a aba
+nnoremap <leader>ac :tabclose<CR>
+
 " Selecionar todo o arquivo
 nnoremap <leader>ba ggVG
 
