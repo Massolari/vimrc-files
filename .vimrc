@@ -238,6 +238,13 @@ let g:which_key_map = {}
 let g:which_key_map[','] = '"," no fim da linha'
 let g:which_key_map[';'] = '";" no fim da linha'
 let g:which_key_map['<Tab>'] = 'Alterar para arquivo anterior'
+let g:which_key_map.a = {
+      \ 'name' : '+Aba',
+      \ 'a' : 'Abrir uma nova',
+      \ 'n' : 'Ir para a próxima (next)',
+      \ 'p' : 'Ir para a anterior (previous)',
+      \ 'c' : 'Fechar (close)',
+      \ }
 let g:which_key_map.b = {
       \ 'name' : '+Buffer',
       \ 'b' : 'Listar abertos',
