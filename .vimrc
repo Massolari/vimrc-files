@@ -95,6 +95,9 @@ let g:vrc_curl_opts = {
   \ '-k': '',
 \}
 
+" Permitir que parâmetros GET sejam declarados em linhas sequenciais
+let g:vrc_split_request_body = 1
+
 " fzf.vim
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
