@@ -60,9 +60,6 @@ if !has('nvim')
     packadd! matchit
 endif
 
-" Cursores múltiplos
-Plug 'terryma/vim-multiple-cursors'
-
 " Se mover melhor com o f/t
 Plug 'unblevable/quick-scope'
 
