@@ -229,7 +229,7 @@ let g:vista#executives = ['coc']
 let g:vista#renderer#enable_icon = 1
 
 " Extensões do coc
-let g:coc_global_extensions = ['coc-phpls', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-vimtex', 'coc-yaml', 'coc-vetur', 'coc-css', 'coc-tabnine']
+let g:coc_global_extensions = ['coc-phpls', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-vimtex', 'coc-yaml', 'coc-vetur', 'coc-css', 'coc-xml']
 
 " Configuração do which-key
 call which_key#register('<Space>', "g:which_key_map")
