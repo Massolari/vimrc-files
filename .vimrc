@@ -230,7 +230,17 @@ let g:vista#executives = ['coc']
 let g:vista#renderer#enable_icon = 1
 
 " Extensões do coc
-let g:coc_global_extensions = ['coc-phpls', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-vimtex', 'coc-yaml', 'coc-vetur', 'coc-css', 'coc-xml']
+let g:coc_global_extensions = [
+    \ 'coc-css',
+    \ 'coc-flutter',
+    \ 'coc-html',
+    \ 'coc-json',
+    \ 'coc-phpls',
+    \ 'coc-tsserver',
+    \ 'coc-vetur',
+    \ 'coc-xml',
+    \ 'coc-yaml',
+    \ ]
 
 " Mapemamento de arquivos do coc
 let g:coc_filetype_map = {
