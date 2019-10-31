@@ -199,6 +199,7 @@ let g:ale_fixers = {
 \   'typescript': [ 'tslint' ],
 \   'sql': [ 'pgformatter' ],
 \   'javascript': [ 'eslint' ],
+\   'dart': [ 'dartfmt' ],
 \ }
 
 " Desabilitar eslint para typescript, usando tslint
@@ -230,6 +231,11 @@ let g:vista#renderer#enable_icon = 1
 
 " Extensões do coc
 let g:coc_global_extensions = ['coc-phpls', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-vimtex', 'coc-yaml', 'coc-vetur', 'coc-css', 'coc-xml']
+
+" Mapemamento de arquivos do coc
+let g:coc_filetype_map = {
+    \ 'html.twig': 'html',
+    \ }
 
 " Configuração do which-key
 call which_key#register('<Space>', "g:which_key_map")
