@@ -95,6 +95,11 @@ let g:vrc_curl_opts = {
   \ '-k': '',
 \}
 
+" Formatar resposta em JSON
+let g:vrc_auto_format_response_patterns = {
+    \ 'json': 'python3 -m json.tool',
+\ }
+
 " Permitir que parâmetros GET sejam declarados em linhas sequenciais
 let g:vrc_split_request_body = 1
 
