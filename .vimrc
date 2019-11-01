@@ -468,10 +468,16 @@ augroup vimrc-wrapping
   autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
 augroup END
 
-" vim-javascript
+" Identação no javascript
 augroup vimrc-javascript
   autocmd!
   autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4
+augroup END
+
+" Identação no Dart
+augroup vimrc-javascript
+  autocmd!
+  autocmd FileType dart set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
 augroup END
 
 set autoread
