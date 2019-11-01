@@ -381,6 +381,9 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 " Impedir que caracteres sejam escondidos em arquivos markdown
 let g:indentLine_fileTypeExclude = ['markdown']
 
+" Impedir que o indentline funcione no terminal
+let g:indentLine_bufTypeExclude = ['terminal']
+
 "*****************************************************************************
 "" Comandos
 "*****************************************************************************
