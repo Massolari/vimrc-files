@@ -389,6 +389,11 @@ let g:indentLine_fileTypeExclude = ['markdown']
 " Impedir que o indentline funcione no terminal
 let g:indentLine_bufTypeExclude = ['terminal']
 
+" Variáveis usadas para reutilizar o terminal
+let s:monkey_terminal_window = -1
+let s:monkey_terminal_buffer = -1
+let s:monkey_terminal_job_id = -1
+
 "*****************************************************************************
 "" Comandos
 "*****************************************************************************
@@ -457,6 +462,52 @@ function! NearestMethodOrFunction() abort
   return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
 
+" Reutilizar o mesmo terminal
+function! MonkeyTerminalOpen()
+  " Check if buffer exists, if not create a window and a buffer
+  if !bufexists(s:monkey_terminal_buffer)
+    " Creates a window call monkey_terminal
+    new monkey_terminal
+    " Moves to the window the right the current one
+    wincmd J
+    resize 15
+    let s:monkey_terminal_job_id = termopen($SHELL, { 'detach': 1 })
+
+     " Change the name of the buffer to "Terminal 1"
+     silent file Terminal\ 1
+     " Gets the id of the terminal window
+     let s:monkey_terminal_window = win_getid()
+     let s:monkey_terminal_buffer = bufnr('%')
+
+    " The buffer of the terminal won't appear in the list of the buffers
+    " when calling :buffers command
+    set nobuflisted
+  elseif !win_gotoid(s:monkey_terminal_window)
+    sp
+    " Moves to the window below the current one
+    wincmd J
+    resize 15
+    buffer Terminal\ 1
+     " Gets the id of the terminal window
+     let s:monkey_terminal_window = win_getid()
+  endif
+  norm i
+endfunction
+
+function! MonkeyTerminalToggle()
+  if win_gotoid(s:monkey_terminal_window)
+    call MonkeyTerminalClose()
+  else
+    call MonkeyTerminalOpen()
+  endif
+endfunction
+
+function! MonkeyTerminalClose()
+  if win_gotoid(s:monkey_terminal_window)
+    " close the current window
+    hide
+  endif
+endfunction
 "*****************************************************************************
 "" Comandos automáticos
 "*****************************************************************************
@@ -595,7 +646,8 @@ noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
 
 " Abrir terminal em tela dividida
-nnoremap <leader>th :below split +te<CR>
+" nnoremap <leader>th :below split +te<CR>
+nnoremap <leader>th :call MonkeyTerminalToggle()<CR>
 nnoremap <leader>tv :below vsplit +te<CR>
 
 " Toda a vez que pular para próxima palavra buscada o cursor fica no centro da tela
