@@ -463,14 +463,20 @@ function! NearestMethodOrFunction() abort
 endfunction
 
 " Reutilizar o mesmo terminal
-function! MonkeyTerminalOpen()
+function! MonkeyTerminalOpen(location)
+  let l:position = 'L'
+  let l:resize = "vertical resize 70"
+  if (a:location == 'bottom')
+      let l:position = 'J'
+      let l:resize = "resize 15"
+  endif
   " Check if buffer exists, if not create a window and a buffer
   if !bufexists(s:monkey_terminal_buffer)
     " Creates a window call monkey_terminal
     new monkey_terminal
     " Moves to the window the right the current one
-    wincmd J
-    resize 15
+    :exe "wincmd" l:position
+    :exe l:resize
     let s:monkey_terminal_job_id = termopen($SHELL, { 'detach': 1 })
 
      " Change the name of the buffer to "Terminal 1"
@@ -485,8 +491,8 @@ function! MonkeyTerminalOpen()
   elseif !win_gotoid(s:monkey_terminal_window)
     sp
     " Moves to the window below the current one
-    wincmd J
-    resize 15
+    :exe "wincmd" l:position
+    :exe l:resize
     buffer Terminal\ 1
      " Gets the id of the terminal window
      let s:monkey_terminal_window = win_getid()
@@ -494,11 +500,11 @@ function! MonkeyTerminalOpen()
   norm i
 endfunction
 
-function! MonkeyTerminalToggle()
+function! MonkeyTerminalToggle(location)
   if win_gotoid(s:monkey_terminal_window)
     call MonkeyTerminalClose()
   else
-    call MonkeyTerminalOpen()
+    call MonkeyTerminalOpen(a:location)
   endif
 endfunction
 
@@ -647,8 +653,8 @@ noremap <Leader>v :<C-u>vsplit<CR>
 
 " Abrir terminal em tela dividida
 " nnoremap <leader>th :below split +te<CR>
-nnoremap <leader>th :call MonkeyTerminalToggle()<CR>
-nnoremap <leader>tv :below vsplit +te<CR>
+nnoremap <leader>th :call MonkeyTerminalToggle('bottom')<CR>
+nnoremap <leader>tv :call MonkeyTerminalToggle('right')<CR>
 
 " Toda a vez que pular para próxima palavra buscada o cursor fica no centro da tela
 nnoremap n nzzzv
