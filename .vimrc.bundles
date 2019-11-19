@@ -91,7 +91,7 @@ Plug 'vim-vdebug/vdebug'
 Plug 'metakirby5/codi.vim'
 
 " LaTeX
-Plug 'lervag/vimtex'
+" Plug 'lervag/vimtex'
 
 " Status bar
 Plug 'itchyny/lightline.vim'
