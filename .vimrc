@@ -101,7 +101,7 @@ let g:vrc_auto_format_response_patterns = {
 \ }
 
 " Permitir que parâmetros GET sejam declarados em linhas sequenciais
-let g:vrc_split_request_body = 1
+let g:vrc_split_request_body = 0
 
 " fzf.vim
 set wildmode=list:longest,list:full
