@@ -608,6 +608,7 @@ inoremap <C-l> <right>
 
 " Mapeamentos do coc
 " Abrir outline (ir para função/método) do coc
+nnoremap <silent> <leader>ca :<C-u>CocAction<cr>
 nnoremap <silent> <leader>co :<C-u>CocList outline<cr>
 " Renomear variaveis
 nmap <silent> <leader>cr <Plug>(coc-rename)
