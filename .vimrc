@@ -2,22 +2,22 @@
 "" Configuração do Vim-Plug
 "*****************************************************************************
 if has('vim_starting')
-  set nocompatible               " Be iMproved
+    set nocompatible               " Be iMproved
 endif
 
 let vimplug_exists=expand('~/.vim/autoload/plug.vim')
 
 if !filereadable(vimplug_exists)
-  if !executable("curl")
-    echoerr "You have to install curl or first install vim-plug yourself!"
-    execute "q!"
-  endif
-  echo "Installing Vim-Plug..."
-  echo ""
-  !\curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  let g:not_finish_vimplug = "yes"
+    if !executable("curl")
+        echoerr "You have to install curl or first install vim-plug yourself!"
+        execute "q!"
+    endif
+    echo "Installing Vim-Plug..."
+    echo ""
+    !\curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    let g:not_finish_vimplug = "yes"
 
-  autocmd VimEnter * PlugInstall
+    autocmd VimEnter * PlugInstall
 endif
 
 " Required:
@@ -25,12 +25,12 @@ call plug#begin(expand('~/.vim/plugged'))
 
 " Arquivo de plugins
 if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
+    source ~/.vimrc.bundles
 endif
 
 " Arquivo de plugins do usuário
 if filereadable(expand("~/.vim/.myvimrc.bundles"))
-  source ~/.vim/.myvimrc.bundles
+    source ~/.vim/.myvimrc.bundles
 endif
 
 call plug#end()
@@ -80,6 +80,9 @@ else
     set shell=/bin/sh
 endif
 
+" Exibição de caracteres especiais
+set listchars=tab:↦\ ,nbsp:␣
+
 " Gerenciamento de sessão
 let g:session_directory = "~/.vim/session"
 let g:session_autoload = "no"
@@ -88,17 +91,17 @@ let g:session_command_aliases = 1
 
 " Opções para o vim-rest-console
 let g:vrc_curl_opts = {
-  \ '-sS': '',
-  \ '--connect-timeout': 10,
-  \ '-i': '',
-  \ '--max-time': 60,
-  \ '-k': '',
-\}
+            \ '-sS': '',
+            \ '--connect-timeout': 10,
+            \ '-i': '',
+            \ '--max-time': 60,
+            \ '-k': '',
+            \}
 
 " Formatar resposta em JSON
 let g:vrc_auto_format_response_patterns = {
-    \ 'json': 'python3 -m json.tool',
-\ }
+            \ 'json': 'python3 -m json.tool',
+            \ }
 
 " Permitir que parâmetros GET sejam declarados em linhas sequenciais
 let g:vrc_split_request_body = 0
@@ -133,23 +136,23 @@ let g:vue_disable_pre_processors=1
 
 " Configuração do vdebug
 let g:vdebug_options = {
-\   "path_maps" : {"/var/www/html": "/home/douglasmassolari/PCP"},
-\   "server" : '172.17.0.1',
-\   "port" : 9001
-\}
+            \   "path_maps" : {"/var/www/html": "/home/douglasmassolari/PCP"},
+            \   "server" : '172.17.0.1',
+            \   "port" : 9001
+            \}
 
 " Vdebug mappings
 let g:vdebug_keymap = {
-\    "run" : "<Leader>dr",
-\    "run_to_cursor" : "<leader>dc",
-\    "step_over" : "<F8>",
-\    "step_into" : "<F12>",
-\    "step_out" : "<F10>",
-\    "close" : "<Leader>ds",
-\    "detach" : "<Leader>dd",
-\    "set_breakpoint" : "<Leader>db",
-\    "eval_under_cursor" : "E"
-\}
+            \    "run" : "<Leader>dr",
+            \    "run_to_cursor" : "<leader>dc",
+            \    "step_over" : "<F8>",
+            \    "step_into" : "<F12>",
+            \    "step_out" : "<F10>",
+            \    "close" : "<Leader>ds",
+            \    "detach" : "<Leader>dd",
+            \    "set_breakpoint" : "<Leader>db",
+            \    "eval_under_cursor" : "E"
+            \}
 
 " Usar deoplete desde a inicialização
 let g:deoplete#enable_at_startup = 1
@@ -174,7 +177,7 @@ set scrolloff=5
 
 " Copy/Paste/Cut from clipboard
 if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
+    set clipboard=unnamed,unnamedplus
 endif
 
 " Ao clicar clicar com shift + botão direito do mouse, abre-se um menu
@@ -200,12 +203,13 @@ let g:ale_disable_lsp=0
 
 " Configurações para o ALE embelezar o código
 let g:ale_fixers = {
-\   'php': [ 'phpcbf' ],
-\   'typescript': [ 'tslint' ],
-\   'sql': [ 'pgformatter' ],
-\   'javascript': [ 'eslint' ],
-\   'dart': [ 'dartfmt' ],
-\ }
+            \   'php': [ 'phpcbf' ],
+            \   'typescript': [ 'tslint' ],
+            \   'sql': [ 'pgformatter' ],
+            \   'javascript': [ 'eslint' ],
+            \   'dart': [ 'dartfmt' ],
+            \   'go': [ 'gofmt' ]
+            \ }
 
 " Desabilitar eslint para typescript, usando tslint
 let g:ale_linters_ignore = {'typescript': ['eslint']}
@@ -236,21 +240,21 @@ let g:vista#renderer#enable_icon = 1
 
 " Extensões do coc
 let g:coc_global_extensions = [
-    \ 'coc-css',
-    \ 'coc-flutter',
-    \ 'coc-html',
-    \ 'coc-json',
-    \ 'coc-phpls',
-    \ 'coc-tsserver',
-    \ 'coc-vetur',
-    \ 'coc-xml',
-    \ 'coc-yaml',
-    \ ]
+            \ 'coc-css',
+            \ 'coc-flutter',
+            \ 'coc-html',
+            \ 'coc-json',
+            \ 'coc-phpls',
+            \ 'coc-tsserver',
+            \ 'coc-vetur',
+            \ 'coc-xml',
+            \ 'coc-yaml',
+            \ ]
 
 " Mapemamento de arquivos do coc
 let g:coc_filetype_map = {
-    \ 'html.twig': 'html',
-    \ }
+            \ 'html.twig': 'html',
+            \ }
 
 " Configuração do which-key
 call which_key#register('<Space>', "g:which_key_map")
@@ -263,75 +267,75 @@ let g:which_key_map[','] = '"," no fim da linha'
 let g:which_key_map[';'] = '";" no fim da linha'
 let g:which_key_map['<Tab>'] = 'Alterar para arquivo anterior'
 let g:which_key_map.a = {
-      \ 'name' : '+Aba',
-      \ 'a' : 'Abrir uma nova',
-      \ 'n' : 'Ir para a próxima (next)',
-      \ 'p' : 'Ir para a anterior (previous)',
-      \ 'c' : 'Fechar (close)',
-      \ }
+            \ 'name' : '+Aba',
+            \ 'a' : 'Abrir uma nova',
+            \ 'n' : 'Ir para a próxima (next)',
+            \ 'p' : 'Ir para a anterior (previous)',
+            \ 'c' : 'Fechar (close)',
+            \ }
 let g:which_key_map.b = {
-      \ 'name' : '+Buffer',
-      \ 'b' : 'Listar abertos',
-      \ 'd' : 'Deletar',
-      \ 's' : 'Salvar',
-      \ 'a' : 'Selecionar tudo (all)',
-      \ }
+            \ 'name' : '+Buffer',
+            \ 'b' : 'Listar abertos',
+            \ 'd' : 'Deletar',
+            \ 's' : 'Salvar',
+            \ 'a' : 'Selecionar tudo (all)',
+            \ }
 let g:which_key_map.c = {
-      \ 'name' : '+Coc',
-      \ 'o' : 'Buscar símbolos',
-      \ 'r' : 'Renomear Variável',
-      \ 's' : 'Salvar',
-      \ }
+            \ 'name' : '+Coc',
+            \ 'o' : 'Buscar símbolos',
+            \ 'r' : 'Renomear Variável',
+            \ 's' : 'Salvar',
+            \ }
 let g:which_key_map.d = {
-      \ 'name' : '+Debug',
-      \ 'b' : 'Adicionar breakpoint',
-      \ 'r' : 'Executar (run) o modo debug',
-      \ 's' : 'Parar (stop) o modo debug',
-      \ }
+            \ 'name' : '+Debug',
+            \ 'b' : 'Adicionar breakpoint',
+            \ 'r' : 'Executar (run) o modo debug',
+            \ 's' : 'Parar (stop) o modo debug',
+            \ }
 let g:which_key_map.g = {
-      \ 'name' : '+Git',
-      \ 'b' : 'Blame',
-      \ 'c' : 'Commit',
-      \ 'l' : 'Pull',
-      \ 'p' : 'Push',
-      \ 's' : 'Status',
-      \ 'w' : 'Salvar e adicionar ao stage',
-      \ }
+            \ 'name' : '+Git',
+            \ 'b' : 'Blame',
+            \ 'c' : 'Commit',
+            \ 'l' : 'Pull',
+            \ 'p' : 'Push',
+            \ 's' : 'Status',
+            \ 'w' : 'Salvar e adicionar ao stage',
+            \ }
 let g:which_key_map.h = 'dividir-tela-horizontalmente'
 let g:which_key_map.i = 'indentar-arquivo'
 let g:which_key_map.o = {
-      \ 'name' : '+Abrir arquivos do vim',
-      \ 'v' : 'Abrir .vimrc',
-      \ 'b' : 'Abrir .vimrc.bundles',
-      \ 'm' : 'Abrir .myvimrc',
-      \ 'u' : 'Abrir .myvimrc.bundles',
-      \ 's' : 'Atualizar (source) configurações do vim',
-      \ }
+            \ 'name' : '+Abrir arquivos do vim',
+            \ 'v' : 'Abrir .vimrc',
+            \ 'b' : 'Abrir .vimrc.bundles',
+            \ 'm' : 'Abrir .myvimrc',
+            \ 'u' : 'Abrir .myvimrc.bundles',
+            \ 's' : 'Atualizar (source) configurações do vim',
+            \ }
 let g:which_key_map.p = {
-      \ 'name' : '+Projeto',
-      \ 'f' : 'Buscar (find) arquivo',
-      \ 's' : 'Procurar (search) nos arquivos',
-      \ 't' : 'Gerar arquivo de tags',
-      \ }
+            \ 'name' : '+Projeto',
+            \ 'f' : 'Buscar (find) arquivo',
+            \ 's' : 'Procurar (search) nos arquivos',
+            \ 't' : 'Gerar arquivo de tags',
+            \ }
 let g:which_key_map.q = 'alternar-quickfix'
 let g:which_key_map.s = {
-      \ 'name' : '+Sessão',
-      \ 'c' : 'Fechar (close)',
-      \ 'd' : 'Deletar',
-      \ 'o' : 'Abrir',
-      \ 's' : 'Salvar',
-      \ }
+            \ 'name' : '+Sessão',
+            \ 'c' : 'Fechar (close)',
+            \ 'd' : 'Deletar',
+            \ 'o' : 'Abrir',
+            \ 's' : 'Salvar',
+            \ }
 let g:which_key_map.t = {
-      \ 'name' : '+Terminal',
-      \ 'h' : 'Abrir horizontalmente',
-      \ 'v' : 'Abrir verticalmente',
-      \ }
+            \ 'name' : '+Terminal',
+            \ 'h' : 'Abrir horizontalmente',
+            \ 'v' : 'Abrir verticalmente',
+            \ }
 let g:which_key_map.u = 'importar-classe-php'
 let g:which_key_map.v = 'dividir-tela-verticalmente'
 let g:which_key_map.w = {
-      \ 'name' : '+Window/Wiki',
-      \ 'c' : 'Fechar janela',
-      \ }
+            \ 'name' : '+Window/Wiki',
+            \ 'c' : 'Fechar janela',
+            \ }
 
 " Diminuir o tempo para mostrar o which-key (Default: 1000)
 set timeoutlen=500
@@ -421,18 +425,18 @@ else
 endif
 
 if &term =~ '256color'
-  set t_ut=
+    set t_ut=
 endif
 
 "*****************************************************************************
 "" Funções
 "*****************************************************************************
 if !exists('*s:setupWrapping')
-  function s:setupWrapping()
-    set wrap
-    set wm=2
-    set textwidth=79
-  endfunction
+    function s:setupWrapping()
+        set wrap
+        set wm=2
+        set textwidth=79
+    endfunction
 endif
 
 " Função para alterar o quickfix
@@ -459,60 +463,60 @@ endfunction
 
 " Exibir o método ou função mais próxima na status
 function! NearestMethodOrFunction() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
+    return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
 
 " Reutilizar o mesmo terminal
 function! MonkeyTerminalOpen(location)
-  let l:position = 'L'
-  let l:resize = "vertical resize 70"
-  if (a:location == 'bottom')
-      let l:position = 'J'
-      let l:resize = "resize 15"
-  endif
-  " Check if buffer exists, if not create a window and a buffer
-  if !bufexists(s:monkey_terminal_buffer)
-    " Creates a window call monkey_terminal
-    new monkey_terminal
-    " Moves to the window the right the current one
-    :exe "wincmd" l:position
-    :exe l:resize
-    let s:monkey_terminal_job_id = termopen($SHELL, { 'detach': 1 })
+    let l:position = 'L'
+    let l:resize = "vertical resize 70"
+    if (a:location == 'bottom')
+        let l:position = 'J'
+        let l:resize = "resize 15"
+    endif
+    " Check if buffer exists, if not create a window and a buffer
+    if !bufexists(s:monkey_terminal_buffer)
+        " Creates a window call monkey_terminal
+        new monkey_terminal
+        " Moves to the window the right the current one
+        :exe "wincmd" l:position
+        :exe l:resize
+        let s:monkey_terminal_job_id = termopen($SHELL, { 'detach': 1 })
 
-     " Change the name of the buffer to "Terminal 1"
-     silent file Terminal\ 1
-     " Gets the id of the terminal window
-     let s:monkey_terminal_window = win_getid()
-     let s:monkey_terminal_buffer = bufnr('%')
+        " Change the name of the buffer to "Terminal 1"
+        silent file Terminal\ 1
+        " Gets the id of the terminal window
+        let s:monkey_terminal_window = win_getid()
+        let s:monkey_terminal_buffer = bufnr('%')
 
-    " The buffer of the terminal won't appear in the list of the buffers
-    " when calling :buffers command
-    set nobuflisted
-  elseif !win_gotoid(s:monkey_terminal_window)
-    sp
-    " Moves to the window below the current one
-    :exe "wincmd" l:position
-    :exe l:resize
-    buffer Terminal\ 1
-     " Gets the id of the terminal window
-     let s:monkey_terminal_window = win_getid()
-  endif
-  norm i
+        " The buffer of the terminal won't appear in the list of the buffers
+        " when calling :buffers command
+        set nobuflisted
+    elseif !win_gotoid(s:monkey_terminal_window)
+        sp
+        " Moves to the window below the current one
+        :exe "wincmd" l:position
+        :exe l:resize
+        buffer Terminal\ 1
+        " Gets the id of the terminal window
+        let s:monkey_terminal_window = win_getid()
+    endif
+    norm i
 endfunction
 
 function! MonkeyTerminalToggle(location)
-  if win_gotoid(s:monkey_terminal_window)
-    call MonkeyTerminalClose()
-  else
-    call MonkeyTerminalOpen(a:location)
-  endif
+    if win_gotoid(s:monkey_terminal_window)
+        call MonkeyTerminalClose()
+    else
+        call MonkeyTerminalOpen(a:location)
+    endif
 endfunction
 
 function! MonkeyTerminalClose()
-  if win_gotoid(s:monkey_terminal_window)
-    " close the current window
-    hide
-  endif
+    if win_gotoid(s:monkey_terminal_window)
+        " close the current window
+        hide
+    endif
 endfunction
 "*****************************************************************************
 "" Comandos automáticos
@@ -520,26 +524,26 @@ endfunction
 
 " Guardar posição do cursor
 augroup vimrc-remember-cursor-position
-  autocmd!
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+    autocmd!
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
 "" txt
 augroup vimrc-wrapping
-  autocmd!
-  autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
+    autocmd!
+    autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
 augroup END
 
 " Identação no javascript
 augroup vimrc-javascript
-  autocmd!
-  autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4
+    autocmd!
+    autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4
 augroup END
 
 " Identação no Dart
 augroup vimrc-javascript
-  autocmd!
-  autocmd FileType dart set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
+    autocmd!
+    autocmd FileType dart set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
 augroup END
 
 set autoread
@@ -626,11 +630,11 @@ inoremap <silent><expr> <c-space> coc#refresh()
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
+    if &filetype == 'vim'
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
 endfunction
 
 " Gerencias sessões
@@ -792,11 +796,15 @@ nnoremap <leader>ldn :r !date +\%d/\%b/\%Y\(\%Y\-\%m\-\%d\)\ \(\%A\)<CR>
 " Inserir data de amanhã
 nnoremap <leader>ldt :r !date +\%d/\%b/\%Y\(\%Y\-\%m\-\%d\)\ \(\%A\) --date='tomorrow'<CR>
 
+" Pular para a próxima função do Elm
+nnoremap ]] :call search('^\w\+\s:\s', 'w')<CR>
+nnoremap [[ :call search('^\w\+\s:\s', 'bW')<CR>
+
 "*****************************************************************************
 "" Source do arquivo do usuário
 "*****************************************************************************
 
 " Arquivo de plugins do usuário
 if filereadable(expand("~/.vim/.myvimrc"))
-  source ~/.vim/.myvimrc
+    source ~/.vim/.myvimrc
 endif

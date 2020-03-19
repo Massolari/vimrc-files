@@ -110,3 +110,6 @@ Plug 'liuchengxu/vim-which-key'
 
 " Requisições REST
 Plug 'diepm/vim-rest-console'
+
+" Tetris
+Plug 'vim-scripts/TeTrIs.vim'
