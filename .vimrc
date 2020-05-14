@@ -71,6 +71,7 @@ endif
 " Configurações do Swap file
 set nobackup
 set noswapfile
+set nowritebackup
 
 set fileformats=unix,dos,mac
 
@@ -398,6 +399,9 @@ let s:monkey_terminal_window = -1
 let s:monkey_terminal_buffer = -1
 let s:monkey_terminal_job_id = -1
 
+" Não redimensionar janelas abertas ao abrir ou fechar janelas
+set noequalalways
+
 "*****************************************************************************
 "" Comandos
 "*****************************************************************************
@@ -541,7 +545,7 @@ augroup vimrc-javascript
 augroup END
 
 " Identação no Dart
-augroup vimrc-javascript
+augroup vimrc-dart
     autocmd!
     autocmd FileType dart set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
 augroup END
