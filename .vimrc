@@ -466,6 +466,17 @@ function! QFixToggle()
     endif
 endfunction
 
+" Função para alterar o quickfix
+function! LListToggle()
+    if exists("g:llist_win")
+        lclose
+        unlet g:llist_win
+    else
+        lopen 10
+        let g:llist_win = bufnr("$")
+    endif
+endfunction
+
 " Função que é usada para import de arquivos;
 function! IPhpInsertUse()
     call PhpInsertUse()
@@ -808,15 +819,18 @@ nnoremap <leader>ou :e ~/.vim/.myvimrc.bundles<CR>
 " Atualizar configurações do nvim
 nnoremap <leader>os :source ~/.config/nvim/init.vim<CR>
 
+" Alterar locationlist
+nnoremap <leader>l :call LListToggle()<CR>
+
 " Mapeamento para listas
 " Abrir lista
-nnoremap <leader>lo :vert botright 45split ~/vimwiki/index.wiki<CR>
+" nnoremap <leader>lo :vert botright 45split ~/vimwiki/index.wiki<CR>
 
 " Inserir data de hoje
-nnoremap <leader>ldn :r !date +\%d/\%b/\%Y\(\%Y\-\%m\-\%d\)\ \(\%A\)<CR>
+" nnoremap <leader>ldn :r !date +\%d/\%b/\%Y\(\%Y\-\%m\-\%d\)\ \(\%A\)<CR>
 
 " Inserir data de amanhã
-nnoremap <leader>ldt :r !date +\%d/\%b/\%Y\(\%Y\-\%m\-\%d\)\ \(\%A\) --date='tomorrow'<CR>
+" nnoremap <leader>ldt :r !date +\%d/\%b/\%Y\(\%Y\-\%m\-\%d\)\ \(\%A\) --date='tomorrow'<CR>
 
 " Pular para a próxima função do Elm
 nnoremap ]] :call search('^\w\+\s:\s', 'w')<CR>

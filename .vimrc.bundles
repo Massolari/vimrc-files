@@ -73,7 +73,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 
 " Organização
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 
 " Engine de snippets
 Plug 'SirVer/ultisnips'
