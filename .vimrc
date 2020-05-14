@@ -402,6 +402,18 @@ let s:monkey_terminal_job_id = -1
 " Não redimensionar janelas abertas ao abrir ou fechar janelas
 set noequalalways
 
+" Espaço maior para mensagens
+set cmdheight=2
+
+" Diminuir tempo de atualização
+set updatetime=300
+
+" Não passar as mensagems para o |ins-completion-menu|
+set shortmess+=c
+
+" Deixar a coluna de sinais sempre aberta
+set signcolumn=yes
+
 "*****************************************************************************
 "" Comandos
 "*****************************************************************************
@@ -596,6 +608,7 @@ augroup markdown-noindent
     autocmd!
     autocmd FileType markdown setlocal conceallevel=0
 augroup END
+
 "*****************************************************************************
 "" Mapeamentos
 "*****************************************************************************
@@ -615,8 +628,9 @@ inoremap <C-k> <up>
 inoremap <C-l> <right>
 
 " Mapeamentos do coc
-" Abrir outline (ir para função/método) do coc
+" Abrir menu de ações disponívels
 nnoremap <silent> <leader>ca :<C-u>CocAction<cr>
+" Abrir outline (ir para função/método) do coc
 nnoremap <silent> <leader>co :<C-u>CocList outline<cr>
 " Renomear variaveis
 nmap <silent> <leader>cr <Plug>(coc-rename)
@@ -640,6 +654,10 @@ function! s:show_documentation()
         call CocAction('doHover')
     endif
 endfunction
+
+" Scrollar na floatwindow
+nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
+nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
 
 " Gerencias sessões
 nnoremap <leader>so :OpenSession<Space>
