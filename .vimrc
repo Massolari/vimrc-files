@@ -297,6 +297,7 @@ let g:which_key_map.g = {
             \ 'name' : '+Git',
             \ 'b' : 'Blame',
             \ 'c' : 'Commit',
+            \ 'g' : 'Log',
             \ 'l' : 'Pull',
             \ 'p' : 'Push',
             \ 's' : 'Status',
@@ -304,6 +305,7 @@ let g:which_key_map.g = {
             \ }
 let g:which_key_map.h = 'dividir-tela-horizontalmente'
 let g:which_key_map.i = 'indentar-arquivo'
+let g:which_key_map.l = 'alternar-locationlist'
 let g:which_key_map.o = {
             \ 'name' : '+Abrir arquivos do vim',
             \ 'v' : 'Abrir .vimrc',
@@ -331,7 +333,6 @@ let g:which_key_map.t = {
             \ 'h' : 'Abrir horizontalmente',
             \ 'v' : 'Abrir verticalmente',
             \ }
-let g:which_key_map.u = 'importar-classe-php'
 let g:which_key_map.v = 'dividir-tela-verticalmente'
 let g:which_key_map.w = {
             \ 'name' : '+Window/Wiki',
@@ -477,12 +478,6 @@ function! LListToggle()
     endif
 endfunction
 
-" Função que é usada para import de arquivos;
-function! IPhpInsertUse()
-    call PhpInsertUse()
-    call feedkeys('a',  'n')
-endfunction
-
 " Função para pegar a branch atual
 function! GitBranch()
     return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
@@ -587,13 +582,6 @@ augroup twig-comment
     autocmd FileType html.twig setlocal commentstring={#\ %s\ #}
 augroup END
 
-" Insere o 'use' de classes em arquivos php
-" autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
-augroup php-autoimport
-    autocmd!
-    autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
-augroup END
-
 " Sempre que entrar na janela de quickfix retirar o mapeamento customizado do Enter
 augroup enable-cr-quickfix
     " In the quickfix window, <CR> is used to jump to the error under the cursor, so undefine the mapping there.
@@ -680,9 +668,10 @@ nnoremap <leader>sc :CloseSession<CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gg :Glog<CR>
 nnoremap <leader>gl :Gpull<CR>
 nnoremap <leader>gp :Gpush<CR>
-nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gs :Git<CR>
 nnoremap <leader>gw :Gwrite<CR>
 
 " Dividir a tela mais rapidamente
@@ -727,7 +716,7 @@ nnoremap <silent> <leader>bb :Buffers<CR>
 " Fechar buffer atual
 noremap <leader>bd :bp\|bd #<CR>
 
-" Salvar mais rapidamente
+" Salvar buffer
 nnoremap <leader>bs :w<CR>
 
 " Procurar arquivo na pasta atual
@@ -736,14 +725,8 @@ nnoremap <silent> <leader>pf :FZF -m<CR>
 " Procurar nos arquivos
 nnoremap <leader>ps :Find 
 
-" Gerar arquivo tags
-nnoremap <leader>pt :AsyncRun ctags -R --fields=+laimS --languages=php --exclude="\.git" --exclude="app/cache" --exclude="node_modules"<CR>
-
 " Fechar janela
 nnoremap <leader>wc :q<CR>
-
-" Abrir/fechar tagbar
-nmap <silent> <F4> :Vista!!<CR>
 
 " Mover bloco de código selecionado
 vnoremap J :m '>+1<CR>gv=gv
@@ -765,23 +748,11 @@ nnoremap <silent> <leader><leader> :noh<cr>
 " Alterar de arquivo mais rapidamente
 nnoremap <silent> <leader><Tab> 
 
-" Rodar script de banco
-nnoremap <F6> :w<CR>:AsyncRun PGPASSWORD=postgres psql -U postgres -d integratto2 -h localhost -f '%'<CR>
-
-" Rodar comando de banco
-nnoremap <F7> "sY:AsyncRun PGPASSWORD=postgres psql -U postgres -d integratto2 -h localhost -c "s"<CR>
-
-" Rodar comando de banco selecionado
-vnoremap <F7> "sy:AsyncRun PGPASSWORD=postgres psql -U postgres -d integratto2 -h localhost -c "s"<CR>gv
-
 " Limpar espaços em branco nos finais da linha
 nnoremap <F5> mp:%s/\s\+$/<CR>`p
 
 " Buscar o que está visualmente selecionado pressionando //
 vnoremap // y/<C-R>"<CR>
-
-" Rodar o M.D.A.
-noremap <F9> :AsyncRun docker-compose run --rm php-transform<CR>
 
 " Enter no modo normal funciona como no modo inserção
 nnoremap <CR> i<CR><Esc>
@@ -840,7 +811,7 @@ nnoremap [[ :call search('^\w\+\s:\s', 'bW')<CR>
 "" Source do arquivo do usuário
 "*****************************************************************************
 
-" Arquivo de plugins do usuário
+" Arquivo de configurações do usuário
 if filereadable(expand("~/.vim/.myvimrc"))
     source ~/.vim/.myvimrc
 endif
