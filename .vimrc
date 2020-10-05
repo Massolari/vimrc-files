@@ -366,9 +366,6 @@ endif
 " Validar xml com o nsjusecase.xsd
 let g:ale_xml_xmllint_options = "--noout --schema vendor/nasajon/mdatransformer/schemas/nsjusecase.xsd %"
 
-" Ao executar o AsyncRun já abrir o quickfix
-let g:asyncrun_open = 10
-
 " Usar o emmet apenas no modo visual ou no modo inserção
 let g:user_emmet_mode='iv'
 
@@ -462,7 +459,7 @@ function! QFixToggle()
         cclose
         unlet g:qfix_win
     else
-        copen 10
+        botright copen 10
         let g:qfix_win = bufnr("$")
     endif
 endfunction
@@ -550,12 +547,6 @@ augroup vimrc-remember-cursor-position
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
-"" txt
-augroup vimrc-wrapping
-    autocmd!
-    autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
-augroup END
-
 " Identação no javascript
 augroup vimrc-javascript
     autocmd!
@@ -612,6 +603,13 @@ augroup LuaHighlight
   autocmd!
   autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
 augroup END
+
+" Formata o arquivo ao salvar
+" augroup format-on-save
+"     autocmd!
+"     autocmd BufWrite * silent! lua vim.lsp.buf.formatting_sync(nil, 1000)
+" augroup END
+
 "*****************************************************************************
 "" Mapeamentos
 "*****************************************************************************
@@ -630,31 +628,69 @@ inoremap <C-j> <down>
 inoremap <C-k> <up>
 inoremap <C-l> <right>
 
+lua <<EOF
+
+-- require'nvim_lsp'.elmls.setup{
+--     cmd = { "/home/massolari/.yarn/bin/elm-language-server" },
+--     settings = {
+--         elmFormatPath = "/home/massolari/.yarn/bin/elm-format",
+--         elmPath = "/home/massolari/.yarn/bin/elm",
+--         elmTestPath = "/home/massolari/.yarn/bin/elm-test"
+--     }
+-- }
+
+-- require'nvim_lsp'.jsonls.setup{}
+-- require'nvim_lsp'.tsserver.setup{}
+-- require'nvim_lsp'.vimls.setup{}
+-- require'nvim_lsp'.yamlls.setup{}
+
+
+EOF
+
+" set omnifunc=v:lua.vim.lsp.omnifunc
+
 " Mapeamentos do coc
 " Abrir menu de ações disponívels
-nnoremap <silent> <leader>ca :<C-u>CocAction<cr>
+nnoremap <silent> <leader>ca :call CocActionAsync('codeAction', '')<cr>
+" nmap <silent> <leader>ca <Plug>(coc-codeaction)
+" nnoremap <silent> <leader>ca <cmd>lua vim.lsp.buf.code_action()<CR>
+
 " Abrir outline (ir para função/método) do coc
 nnoremap <silent> <leader>co :<C-u>CocList outline<cr>
+" nnoremap <silent> <leader>co <cmd>lua vim.lsp.buf.document_symbol()<cr>
+
 " Renomear variaveis
 nmap <silent> <leader>cr <Plug>(coc-rename)
+" nmap <silent> <leader>cr <cmd>lua vim.lsp.buf.rename()<CR>
+
 " Use `[c` and `]c` for navigate diagnostics
 nmap <silent> <leader>cdp <Plug>(coc-diagnostic-prev)
 nmap <silent> <leader>cdn <Plug>(coc-diagnostic-next)
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+
 nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gt <cmd>lua vim.lsp.buf.type_definition()<CR>
+
 nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+
 nmap <silent> gr <Plug>(coc-references)
+" nmap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+
 " Use <c-space> for trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
+" inoremap <silent> <c-space> 
 " Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+" nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
 
 function! s:show_documentation()
     if &filetype == 'vim'
         execute 'h '.expand('<cword>')
     else
-        call CocAction('doHover')
+        call CocActionAsync('doHover')
     endif
 endfunction
 

@@ -19,23 +19,17 @@ Plug 'bronson/vim-trailing-whitespace'
 " Adicionar comentários com 'gcc'
 Plug 'tpope/vim-commentary'
 
-" Comandos assíncronos (VIM 8+)
-Plug 'skywind3000/asyncrun.vim'
-
 " Habilita o uso do emmet (<C-y>,)
 Plug 'mattn/emmet-vim'
 
 " Tema gruvbox
 Plug 'morhetz/gruvbox'
 
-" Tema do vscode
-Plug 'tomasiser/vim-code-dark'
-
 " Habilita a busca rapida usando duas letras
 Plug 'justinmk/vim-sneak'
 
 " Analise do código em tempo real
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 
 " Mostra um git diff na coluna de número
 Plug 'airblade/vim-gitgutter'
@@ -94,7 +88,7 @@ Plug 'metakirby5/codi.vim'
 Plug 'itchyny/lightline.vim'
 
 " Elm LSP
-Plug 'elm-tooling/elm-language-server'
+" Plug 'elm-tooling/elm-language-server'
 
 " Outline com LSP
 Plug 'liuchengxu/vista.vim'
@@ -102,11 +96,13 @@ Plug 'liuchengxu/vista.vim'
 " Guia de atalhos
 Plug 'liuchengxu/vim-which-key'
 
-" Exibir barra de registradores
-" Plug 'junegunn/vim-peekaboo'
-
-" Requisições REST
 Plug 'diepm/vim-rest-console'
 
 " Tetris
 Plug 'vim-scripts/TeTrIs.vim'
+
+" LSP do Nvim
+" Plug 'neovim/nvim-lspconfig'
+
+" TabNone
+" Plug 'codota/tabnine-vim'
