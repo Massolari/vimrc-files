@@ -564,14 +564,9 @@ augroup LuaHighlight
 augroup END
 
 " Formata o arquivo ao salvar
-" augroup format-on-save
-"     autocmd!
-"     autocmd BufWrite * silent! lua vim.lsp.buf.formatting_sync(nil, 1000)
-" augroup END
-
-augroup coc-cursorhold
+augroup format-on-save
     autocmd!
-    autocmd CursorHold * silent call CocActionAsync('highlight')
+    autocmd BufWrite * silent! lua vim.lsp.buf.formatting_sync(nil, 1000)
 augroup END
 
 augroup coc-update-lighline
@@ -597,74 +592,63 @@ inoremap <C-k> <up>
 inoremap <C-l> <right>
 
 lua <<EOF
+ vim.lsp.set_log_level("debug")
+ local nvim_lsp = require("lspconfig")
 
--- require'nvim_lsp'.elmls.setup{
---     cmd = { "/home/massolari/.yarn/bin/elm-language-server" },
---     settings = {
---         elmFormatPath = "/home/massolari/.yarn/bin/elm-format",
---         elmPath = "/home/massolari/.yarn/bin/elm",
---         elmTestPath = "/home/massolari/.yarn/bin/elm-test"
---     }
--- }
+ local on_attach = function(client, bufnr)
+   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
--- require'nvim_lsp'.jsonls.setup{}
--- require'nvim_lsp'.tsserver.setup{}
--- require'nvim_lsp'.vimls.setup{}
--- require'nvim_lsp'.yamlls.setup{}
+   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+   -- Mappings.
+   local opts = { noremap=true, silent=true }
+   buf_set_keymap('n', '<leader>co', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
+   buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+   buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+   buf_set_keymap('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+   buf_set_keymap('n', '<leader>cr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+   buf_set_keymap('n', '<leader>ce', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 
+   -- Set some keybinds conditional on server capabilities
+   if client.resolved_capabilities.document_formatting then
+     buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+   elseif client.resolved_capabilities.document_range_formatting then
+     buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+   end
+
+   -- Set autocommands conditional on server_capabilities
+   if client.resolved_capabilities.document_highlight then
+     vim.api.nvim_exec([[
+       hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
+       hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
+       hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
+       augroup lsp_document_highlight
+         autocmd!
+         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+       augroup END
+     ]], false)
+   end
+ end
+
+ local servers = { "jsonls", "tsserver", "vimls", "yamlls", "elmls" }
+ for _, lsp in ipairs(servers) do
+   nvim_lsp[lsp].setup { on_attach = on_attach }
+ end
 EOF
 
 " set omnifunc=v:lua.vim.lsp.omnifunc
 
-" Mapeamentos do coc
-" Abrir menu de ações disponívels
-nnoremap <silent> <leader>ca :call CocActionAsync('codeAction', '')<cr>
-" nmap <silent> <leader>ca <Plug>(coc-codeaction)
-" nnoremap <silent> <leader>ca <cmd>lua vim.lsp.buf.code_action()<CR>
-
-" Abrir outline (ir para função/método) do coc
-nnoremap <silent> <leader>co :<C-u>CocList outline<cr>
-" nnoremap <silent> <leader>co <cmd>lua vim.lsp.buf.document_symbol()<cr>
-
-" Renomear variaveis
-nmap <silent> <leader>cr <Plug>(coc-rename)
-" nmap <silent> <leader>cr <cmd>lua vim.lsp.buf.rename()<CR>
-
-" Use `[c` and `]c` for navigate diagnostics
-nmap <silent> <leader>cdp <Plug>(coc-diagnostic-prev)
-nmap <silent> <leader>cdn <Plug>(coc-diagnostic-next)
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-
-nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gt <cmd>lua vim.lsp.buf.type_definition()<CR>
-
-nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
-
-nmap <silent> gr <Plug>(coc-references)
-" nmap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
-
 " Use <c-space> for trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+imap <silent> <c-space> <Plug>(completion_trigger)
 " inoremap <silent> <c-space> 
-" Use K for show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-" nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
-
-function! s:show_documentation()
-    if &filetype == 'vim'
-        execute 'h '.expand('<cword>')
-    else
-        call CocActionAsync('doHover')
-    endif
-endfunction
-
-" Scrollar na floatwindow
-nnoremap <expr><C-f> coc#float#has_float() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <expr><C-b> coc#float#has_float() ? coc#float#scroll(0) : "\<C-b>"
 
 " Gerencias sessões
 nnoremap <leader>so :OpenSession<Space>

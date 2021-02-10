@@ -41,7 +41,7 @@ Plug 'cohama/lexima.vim'
 Plug 'tpope/vim-surround'
 
 " Autocomplete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Habilita o uso do % em tags HTML/XML, if/else entre outros blocos
 if !has('nvim')
@@ -78,10 +78,17 @@ Plug 'itchyny/lightline.vim'
 " Guia de atalhos
 Plug 'liuchengxu/vim-which-key'
 
+" Cliente REST
 Plug 'diepm/vim-rest-console'
 
 " LSP do Nvim
-" Plug 'neovim/nvim-lspconfig'
+Plug 'neovim/nvim-lspconfig'
 
 " TabNone
-" Plug 'codota/tabnine-vim'
+Plug 'codota/tabnine-vim'
+
+" Diagnostic navigation and settings for built-in LSP
+Plug 'nvim-lua/diagnostic-nvim'
+
+" Autocompletion framework for built-in LSP
+Plug 'nvim-lua/completion-nvim'
