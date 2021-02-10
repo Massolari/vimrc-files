@@ -17,7 +17,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'bronson/vim-trailing-whitespace'
 
 " Adicionar comentários com 'gcc'
-Plug 'tpope/vim-commentary'
+Plug 'b3nj5m1n/kommentary'
 
 " Habilita o uso do emmet (<C-y>,)
 Plug 'mattn/emmet-vim'
@@ -85,10 +85,24 @@ Plug 'diepm/vim-rest-console'
 Plug 'neovim/nvim-lspconfig'
 
 " TabNone
-Plug 'codota/tabnine-vim'
+Plug 'aca/completion-tabnine', { 'do': './install.sh' }
 
 " Diagnostic navigation and settings for built-in LSP
 Plug 'nvim-lua/diagnostic-nvim'
 
 " Autocompletion framework for built-in LSP
 Plug 'nvim-lua/completion-nvim'
+
+" Plugin LSP com base no cliente lsp do neovim
+Plug 'glepnir/lspsaga.nvim'
+
+" Telescope
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+" Ícones
+Plug 'ryanoasis/vim-devicons'
+
+" Informações de LSP na statusline
+Plug 'nvim-lua/lsp-status.nvim'
