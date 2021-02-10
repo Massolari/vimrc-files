@@ -652,7 +652,7 @@ lua <<EOF
    end
  end
 
- local servers = { "jsonls", "tsserver", "vimls", "yamlls", "elmls" }
+ local servers = { "jsonls", "tsserver", "vimls", "yamlls", "elmls", "html", "cssls" }
  for _, lsp in ipairs(servers) do
    nvim_lsp[lsp].setup { on_attach = on_attach }
  end
@@ -668,8 +668,8 @@ nnoremap <silent> <C-f> <cmd>lua require('lspsaga.hover').smart_scroll_hover(1)<
 nnoremap <silent> <C-b> <cmd>lua require('lspsaga.hover').smart_scroll_hover(-1)<CR>
 
 " Use <c-space> for trigger completion.
-imap <silent> <c-space> <Plug>(completion_trigger)
-" inoremap <silent> <c-space> 
+" imap <silent> <c-space> <Plug>(completion_trigger)
+inoremap <silent> <c-space> 
 
 vnoremap <leader>ca :lua require'telescope.builtin'.lsp_range_code_actions{}<CR>
 
