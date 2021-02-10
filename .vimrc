@@ -1,10 +1,6 @@
 "*****************************************************************************
 "" Configuração do Vim-Plug
 "*****************************************************************************
-if has('vim_starting')
-    set nocompatible               " Be iMproved
-endif
-
 let vimplug_exists=expand('~/.vim/autoload/plug.vim')
 
 if !filereadable(vimplug_exists)
@@ -35,23 +31,14 @@ endif
 
 call plug#end()
 
-" Required:
-filetype plugin indent on
-
-
 "*****************************************************************************
 "" Configurações básicas
 "*****************************************************************************"
 "" Encoding
-set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
 set bomb
 set binary
-set ttyfast
-
-" Fix backspace indent
-set backspace=indent,eol,start
 
 " Comportamento do Tab
 set tabstop=4
@@ -60,8 +47,6 @@ set shiftwidth=4
 set expandtab
 
 " Busca
-set hlsearch
-set incsearch
 set ignorecase
 set smartcase
 if has('nvim')
@@ -119,9 +104,6 @@ let maplocalleader="\\"
 
 " Habilitar itablico do gruvbox
 let g:gruvbox_italic = 1
-
-" Gruvbox em modo dark
-set background=dark
 
 " Vimwiki fold list
 let g:vimwiki_folding='list'
@@ -184,20 +166,11 @@ endif
 " Ao clicar clicar com shift + botão direito do mouse, abre-se um menu
 set mousemodel=popup
 
-" Habilita cores de sintaxe
-syntax on
-
-" Show the line and column number of the cursor position
-set ruler
-
 " Suporte ao mouse
 set mouse=a
 
 " Mostra os números da linha de forma relativa e o número atual da linha
 set number relativenumber
-
-" Exibir barra de status
-set laststatus=2
 
 " Desabilitar LSP do ALE
 let g:ale_disable_lsp=0
@@ -225,7 +198,6 @@ let g:lightline = {
             \ },
             \     'component_function': {
             \         'gitbranch': 'fugitive#head',
-            \         'method': 'NearestMethodOrFunction',
             \         'cocstatus': 'coc#status'
             \     }
             \ }
@@ -342,18 +314,12 @@ let g:which_key_map.w = {
 " Diminuir o tempo para mostrar o which-key (Default: 1000)
 set timeoutlen=500
 
-" Mostrar comandos no canto inferior direito
-set showcmd
-
 " Tema do gruvbox
 colorscheme gruvbox
 
 " Sobrescrevendo cor do quick-scope porque ela some no tema do vscode
 highlight QuickScopePrimary guifg='#7a7608'
 highlight QuickScopeSecondary guifg='#e27bed'
-
-" Ligar o menu de opções com tab
-set wildmenu
 
 " Realçar linha onde o cursor está
 set cursorline
@@ -480,11 +446,6 @@ function! GitBranch()
     return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 endfunction
 
-" Exibir o método ou função mais próxima na status
-function! NearestMethodOrFunction() abort
-    return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
-
 " Reutilizar o mesmo terminal
 function! MonkeyTerminalOpen(location)
     let l:position = 'L'
@@ -559,8 +520,6 @@ augroup vimrc-dart
     autocmd FileType dart set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
 augroup END
 
-set autoread
-
 " Corrigir sintaxe nos arquivos .vue
 augroup vue-syntax
     autocmd!
@@ -609,6 +568,15 @@ augroup END
 "     autocmd!
 "     autocmd BufWrite * silent! lua vim.lsp.buf.formatting_sync(nil, 1000)
 " augroup END
+
+augroup coc-cursorhold
+    autocmd!
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+augroup END
+
+augroup coc-update-lighline
+  autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+augroup END
 
 "*****************************************************************************
 "" Mapeamentos
@@ -695,8 +663,8 @@ function! s:show_documentation()
 endfunction
 
 " Scrollar na floatwindow
-nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
-nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
+nnoremap <expr><C-f> coc#float#has_float() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <expr><C-b> coc#float#has_float() ? coc#float#scroll(0) : "\<C-b>"
 
 " Gerencias sessões
 nnoremap <leader>so :OpenSession<Space>
@@ -709,6 +677,9 @@ nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gg :Glog<CR>
+nnoremap <leader>ghu :GitGutterUndoHunk<CR>
+nnoremap <leader>ghp :GitGutterPreviewHunk<CR>
+nnoremap <leader>ghn :GitGutterNextHunk<CR>
 nnoremap <leader>gl :Gpull<CR>
 nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>gs :Git<CR>

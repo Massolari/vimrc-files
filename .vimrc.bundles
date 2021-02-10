@@ -28,9 +28,6 @@ Plug 'morhetz/gruvbox'
 " Habilita a busca rapida usando duas letras
 Plug 'justinmk/vim-sneak'
 
-" Analise do código em tempo real
-" Plug 'w0rp/ale'
-
 " Mostra um git diff na coluna de número
 Plug 'airblade/vim-gitgutter'
 
@@ -63,9 +60,6 @@ Plug 'scrooloose/nerdtree'
 " Warper para comandos do git
 Plug 'tpope/vim-fugitive'
 
-" Organização
-" Plug 'vimwiki/vimwiki'
-
 " Engine de snippets
 Plug 'SirVer/ultisnips'
 
@@ -75,31 +69,16 @@ Plug 'honza/vim-snippets'
 " Editorconfig
 Plug 'editorconfig/editorconfig-vim'
 
-" Debug
-Plug 'vim-vdebug/vdebug'
-
 " Executar script em tempo real
 Plug 'metakirby5/codi.vim'
 
-" LaTeX
-" Plug 'lervag/vimtex'
-
 " Status bar
 Plug 'itchyny/lightline.vim'
-
-" Elm LSP
-" Plug 'elm-tooling/elm-language-server'
-
-" Outline com LSP
-Plug 'liuchengxu/vista.vim'
 
 " Guia de atalhos
 Plug 'liuchengxu/vim-which-key'
 
 Plug 'diepm/vim-rest-console'
-
-" Tetris
-Plug 'vim-scripts/TeTrIs.vim'
 
 " LSP do Nvim
 " Plug 'neovim/nvim-lspconfig'
