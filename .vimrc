@@ -230,21 +230,29 @@ let g:which_key_map.c = {
             \ 'name' : '+Code',
             \ 'a' : 'Ações',
             \ 'd' : 'Ver definição',
+            \ 'e' : 'Mostrar erro da linha',
             \ 'o' : 'Buscar símbolos',
             \ 'r' : 'Renomear Variável',
             \ 's' : 'Assinatura',
             \ }
-let g:which_key_map.d = {
-            \ 'name' : '+Debug',
-            \ 'b' : 'Adicionar breakpoint',
-            \ 'r' : 'Executar (run) o modo debug',
-            \ 's' : 'Parar (stop) o modo debug',
-            \ }
+" let g:which_key_map.d = {
+"             \ 'name' : '+Debug',
+"             \ 'b' : 'Adicionar breakpoint',
+"             \ 'r' : 'Executar (run) o modo debug',
+"             \ 's' : 'Parar (stop) o modo debug',
+"             \ }
 let g:which_key_map.g = {
             \ 'name' : '+Git',
             \ 'b' : 'Blame',
             \ 'c' : 'Commit',
             \ 'g' : 'Log',
+            \ 'h' : {
+            \   'name': '+Hunks',
+            \   'n': 'Próximo (next)',
+            \   'p': 'Anterior (previous)',
+            \   'u': 'Desfazer (undo)',
+            \   'v': 'Ver',
+            \ },
             \ 'l' : 'Pull',
             \ 'p' : 'Push',
             \ 's' : 'Status',
@@ -263,9 +271,9 @@ let g:which_key_map.o = {
             \ }
 let g:which_key_map.p = {
             \ 'name' : '+Projeto',
+            \ 'e' : 'Procurar texto sob cursor',
             \ 'f' : 'Buscar (find) arquivo',
             \ 's' : 'Procurar (search) nos arquivos',
-            \ 't' : 'Gerar arquivo de tags',
             \ }
 let g:which_key_map.q = 'alternar-quickfix'
 let g:which_key_map.s = {
@@ -713,8 +721,9 @@ nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gg :Glog<CR>
 nnoremap <leader>ghu :GitGutterUndoHunk<CR>
-nnoremap <leader>ghp :GitGutterPreviewHunk<CR>
+nnoremap <leader>ghv :GitGutterPreviewHunk<CR>
 nnoremap <leader>ghn :GitGutterNextHunk<CR>
+nnoremap <leader>ghp :GitGutterPrevHunk<CR>
 nnoremap <leader>gl :Gpull<CR>
 nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>gs :Git<CR>
@@ -757,7 +766,8 @@ nnoremap <leader>ac :tabclose<CR>
 nnoremap <leader>ba ggVG
 
 " Abrir arquivo na lista de buffers
-nnoremap <silent> <leader>bb :Telescope buffers<CR>
+" nnoremap <silent> <leader>bb :Telescope buffers<CR>
+nnoremap <silent> <leader>bb :Buffers<CR>
 
 " Fechar buffer atual
 noremap <leader>bd :bp\|bd #<CR>
