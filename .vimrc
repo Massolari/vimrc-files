@@ -563,10 +563,6 @@ augroup auto-complete
 augroup END
 
 
-" augroup coc-update-lighline
-"   autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
-" augroup END
-
 "*****************************************************************************
 "" Mapeamentos
 "*****************************************************************************
@@ -663,10 +659,22 @@ lua <<EOF
    end
  end
 
- local servers = { "jsonls", "tsserver", "vimls", "yamlls", "elmls", "html", "cssls" }
+ local servers = { "jsonls", "tsserver", "vimls", "yamlls", "elmls" }
  for _, lsp in ipairs(servers) do
    nvim_lsp[lsp].setup { on_attach = on_attach }
  end
+
+ local capabilities = vim.lsp.protocol.make_client_capabilities()
+ capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+ require'lspconfig'.html.setup {
+   capabilities = capabilities,
+   on_attach = on_attach
+ }
+ require'lspconfig'.cssls.setup {
+   capabilities = capabilities,
+   on_attach = on_attach
+ }
 
 
  local saga = require 'lspsaga'
@@ -679,8 +687,8 @@ nnoremap <silent> <C-f> <cmd>lua require('lspsaga.hover').smart_scroll_hover(1)<
 nnoremap <silent> <C-b> <cmd>lua require('lspsaga.hover').smart_scroll_hover(-1)<CR>
 
 " Use <c-space> for trigger completion.
-" imap <silent> <c-space> <Plug>(completion_trigger)
-inoremap <silent> <c-space> 
+imap <silent> <c-space> <Plug>(completion_trigger)
+" inoremap <silent> <c-space> 
 
 vnoremap <leader>ca :lua require'telescope.builtin'.lsp_range_code_actions{}<CR>
 
