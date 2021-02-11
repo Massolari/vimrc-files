@@ -353,6 +353,9 @@ set shortmess+=c
 " Deixar a coluna de sinais sempre aberta
 set signcolumn=yes
 
+" Autocomplete melhor
+set completeopt=menuone,noinsert,noselect
+
 "*****************************************************************************
 "" Comandos
 "*****************************************************************************
@@ -554,6 +557,12 @@ augroup format-on-save
     autocmd BufWrite * silent! lua vim.lsp.buf.formatting_sync(nil, 1000)
 augroup END
 
+" Autocomplete
+augroup auto-complete
+    autocmd BufEnter * lua require'completion'.on_attach()
+augroup END
+
+
 " augroup coc-update-lighline
 "   autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 " augroup END
@@ -609,6 +618,8 @@ lua <<EOF
 
    lsp_status.on_attach(client)
    client.config.capabilities = vim.tbl_extend('keep', client.config.capabilities or {}, lsp_status.capabilities)
+
+   require'completion'.on_attach(client)
 
    -- Mappings.
    local opts = { noremap=true, silent=true }
