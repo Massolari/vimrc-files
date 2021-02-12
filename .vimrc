@@ -611,7 +611,7 @@ lua <<EOF
    -- Mappings.
    local opts = { noremap=true, silent=true }
    buf_set_keymap('n', '<leader>ca', "<cmd>lua require'fzf_lsp'.code_action_call{}<CR>", opts)
-   buf_set_keymap('n', '<leader>cd', "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", opts)
+   buf_set_keymap('n', '<leader>cd', "<cmd>lua require'fzf_lsp'.diagnostic_call{}<CR>", opts)
    buf_set_keymap('n', '<leader>co', "<cmd>lua require'fzf_lsp'.document_symbol_call{}<CR>", opts)
    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
    buf_set_keymap('n', 'K', "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
@@ -634,9 +634,9 @@ lua <<EOF
    -- Set autocommands conditional on server_capabilities
    if client.resolved_capabilities.document_highlight then
      vim.api.nvim_exec([[
-       hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-       hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-       hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
+       hi LspReferenceRead cterm=bold ctermbg=red guibg=black
+       hi LspReferenceText cterm=bold ctermbg=red guibg=black
+       hi LspReferenceWrite cterm=bold ctermbg=red guibg=black
        augroup lsp_document_highlight
          autocmd!
          autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
@@ -757,7 +757,7 @@ noremap <leader>bd :bp\|bd #<CR>
 nnoremap <leader>bs :w<CR>
 
 " Procurar arquivo na pasta atual
-nnoremap <silent> <leader>pf :FZF -m<CR>
+nnoremap <silent> <leader>pf :Files<CR>
 
 " Procurar nos arquivos
 nnoremap <leader>ps :Find 

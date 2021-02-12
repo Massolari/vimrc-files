@@ -87,9 +87,6 @@ Plug 'neovim/nvim-lspconfig'
 " TabNone
 Plug 'aca/completion-tabnine', { 'do': './install.sh' }
 
-" Diagnostic navigation and settings for built-in LSP
-Plug 'nvim-lua/diagnostic-nvim'
-
 " Autocompletion framework for built-in LSP
 Plug 'nvim-lua/completion-nvim'
 
