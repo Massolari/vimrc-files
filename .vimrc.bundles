@@ -96,13 +96,11 @@ Plug 'nvim-lua/completion-nvim'
 " Plugin LSP com base no cliente lsp do neovim
 Plug 'glepnir/lspsaga.nvim'
 
-" Telescope
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-
 " Ícones
 Plug 'ryanoasis/vim-devicons'
 
 " Informações de LSP na statusline
 Plug 'nvim-lua/lsp-status.nvim'
+
+" Comandos de LSP com fzf
+Plug 'gfanto/fzf-lsp.nvim'

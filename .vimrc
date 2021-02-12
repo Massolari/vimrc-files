@@ -597,23 +597,6 @@ lua <<EOF
 
  local nvim_lsp = require("lspconfig")
 
- require("telescope").setup{
-     defaults = {
-         vim_grep_arguments = {
-             'rg',
-             '--color=never',
-             '--ignore',
-             '--hidden',
-             '--ignore-case',
-             '--no-heading',
-             '--with-filename',
-             '--line-number',
-             '--column',
-             '--files'
-         }
-     }
- }
-
  local on_attach = function(client, bufnr)
    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -627,17 +610,16 @@ lua <<EOF
 
    -- Mappings.
    local opts = { noremap=true, silent=true }
-   buf_set_keymap('n', '<leader>ca', "<cmd>lua require'telescope.builtin'.lsp_code_actions{}<CR>", opts)
-   -- buf_set_keymap('v', '<leader>ca', "<cmd>'<,'>lua require'telescope.builtin'.lsp_range_code_actions{}<CR>", opts)
+   buf_set_keymap('n', '<leader>ca', "<cmd>lua require'fzf_lsp'.code_action_call{}<CR>", opts)
    buf_set_keymap('n', '<leader>cd', "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", opts)
-   buf_set_keymap('n', '<leader>co', "<cmd>lua require'telescope.builtin'.lsp_document_symbols{}<CR>", opts)
+   buf_set_keymap('n', '<leader>co', "<cmd>lua require'fzf_lsp'.document_symbol_call{}<CR>", opts)
    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
    buf_set_keymap('n', 'K', "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
    buf_set_keymap('n', '<leader>cs', "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", opts)
    buf_set_keymap('n', 'gy', "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
    buf_set_keymap('n', '<leader>cr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-   buf_set_keymap('n', 'gr', "<cmd>lua require'telescope.builtin'.lsp_references{}<CR>", opts)
+   buf_set_keymap('n', 'gr', "<cmd>lua require'fzf_lsp'.references_call{}<CR>", opts)
    buf_set_keymap('n', '<leader>ce', "<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>", opts)
    buf_set_keymap('n', '[d', "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>", opts)
    buf_set_keymap('n', ']d', "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", opts)
@@ -698,7 +680,7 @@ nnoremap <silent> <C-b> <cmd>lua require('lspsaga.hover').smart_scroll_hover(-1)
 imap <silent> <c-space> <Plug>(completion_trigger)
 " inoremap <silent> <c-space> 
 
-vnoremap <leader>ca :lua require'telescope.builtin'.lsp_range_code_actions{}<CR>
+vnoremap <leader>ca :lua require'fzf_lsp'.range_code_action_call{}<CR>
 
 " Tabnine
 let g:completion_chain_complete_list = {
@@ -766,7 +748,6 @@ nnoremap <leader>ac :tabclose<CR>
 nnoremap <leader>ba ggVG
 
 " Abrir arquivo na lista de buffers
-" nnoremap <silent> <leader>bb :Telescope buffers<CR>
 nnoremap <silent> <leader>bb :Buffers<CR>
 
 " Fechar buffer atual
@@ -776,13 +757,13 @@ noremap <leader>bd :bp\|bd #<CR>
 nnoremap <leader>bs :w<CR>
 
 " Procurar arquivo na pasta atual
-nnoremap <silent> <leader>pf :Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>
+nnoremap <silent> <leader>pf :FZF -m<CR>
 
 " Procurar nos arquivos
 nnoremap <leader>ps :Find 
 
 " Procurar texto do cursor nos arquivos
-nnoremap <leader>pe :Telescope grep_string find_command=rg,--ignore,--hidden,--files<CR>
+nnoremap <leader>pe :Find <c-r>=expand("<cword>")<CR><CR>
 
 " Fechar janela
 nnoremap <leader>wc :q<CR>
