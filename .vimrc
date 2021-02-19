@@ -710,8 +710,8 @@ nnoremap <leader>ghu :GitGutterUndoHunk<CR>
 nnoremap <leader>ghv :GitGutterPreviewHunk<CR>
 nnoremap <leader>ghn :GitGutterNextHunk<CR>
 nnoremap <leader>ghp :GitGutterPrevHunk<CR>
-nnoremap <leader>gl :Gpull<CR>
-nnoremap <leader>gp :Gpush<CR>
+nnoremap <leader>gl :Git pull<CR>
+nnoremap <leader>gp :Git push<CR>
 nnoremap <leader>gs :Git<CR>
 nnoremap <leader>gw :Gwrite<CR>
 
