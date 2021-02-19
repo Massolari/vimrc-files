@@ -194,7 +194,7 @@ let g:ale_fix_on_save=1
 " Branch do git na statusbar
 let g:lightline = {
             \     'active': {
-            \         'left': [ ['mode', 'paste'], ['gitbranch', 'lspstatus', 'method', 'readonly', 'absolutepath', 'modified'] ]
+            \         'left': [ ['mode', 'paste'], ['gitbranch', 'lspstatus', 'method', 'readonly', 'relativepath', 'modified'] ]
             \ },
             \     'component_function': {
             \         'gitbranch': 'fugitive#head',
@@ -363,6 +363,18 @@ set signcolumn=yes
 
 " Autocomplete melhor
 set completeopt=menuone,noinsert,noselect
+"
+" Tabnine
+let g:completion_chain_complete_list = {
+    \ 'default': [
+    \    {'complete_items': ['lsp', 'snippet', 'tabnine' ]},
+    \    {'mode': '<c-p>'},
+    \    {'mode': '<c-n>'}
+    \]
+\}
+
+" Tecla de confirmação de autocomplete
+let g:completion_confirm_key = "\<C-y>"
 
 "*****************************************************************************
 "" Comandos
@@ -612,6 +624,7 @@ lua <<EOF
    local opts = { noremap=true, silent=true }
    buf_set_keymap('n', '<leader>ca', "<cmd>lua require'fzf_lsp'.code_action_call{}<CR>", opts)
    buf_set_keymap('n', '<leader>cd', "<cmd>lua require'fzf_lsp'.diagnostic_call{}<CR>", opts)
+   buf_set_keymap('n', '<leader>cf', "<cmd>lua vim.lsp.buf.formatting_sync(nil, 1000)<CR>", opts)
    buf_set_keymap('n', '<leader>co', "<cmd>lua require'fzf_lsp'.document_symbol_call{}<CR>", opts)
    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
    buf_set_keymap('n', 'K', "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
@@ -681,15 +694,6 @@ imap <silent> <c-space> <Plug>(completion_trigger)
 " inoremap <silent> <c-space> 
 
 vnoremap <leader>ca :lua require'fzf_lsp'.range_code_action_call{}<CR>
-
-" Tabnine
-let g:completion_chain_complete_list = {
-    \ 'default': [
-    \    {'complete_items': ['lsp', 'snippet', 'tabnine' ]},
-    \    {'mode': '<c-p>'},
-    \    {'mode': '<c-n>'}
-    \]
-\}
 
 " Gerencias sessões
 nnoremap <leader>so :OpenSession<Space>
