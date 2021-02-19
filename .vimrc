@@ -702,10 +702,10 @@ nnoremap <leader>sd :DeleteSession<CR>
 nnoremap <leader>sc :CloseSession<CR>
 
 " Git
-nnoremap <leader>gb :Gblame<CR>
-nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gb :Git blame<CR>
+nnoremap <leader>gc :Git commit<CR>
 nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>gg :Glog<CR>
+nnoremap <leader>gg :Gclog<CR>
 nnoremap <leader>ghu :GitGutterUndoHunk<CR>
 nnoremap <leader>ghv :GitGutterPreviewHunk<CR>
 nnoremap <leader>ghn :GitGutterNextHunk<CR>
