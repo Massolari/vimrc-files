@@ -17,7 +17,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'bronson/vim-trailing-whitespace'
 
 " Adicionar comentários com 'gcc'
-Plug 'b3nj5m1n/kommentary'
+Plug 'tpope/vim-commentary'
 
 " Habilita o uso do emmet (<C-y>,)
 Plug 'mattn/emmet-vim'

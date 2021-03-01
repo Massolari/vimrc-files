@@ -579,7 +579,14 @@ augroup END
 
 " Autocomplete
 augroup auto-complete
+    autocmd!
     autocmd BufEnter * lua require'completion'.on_attach()
+augroup END
+
+" Reconhecer .exs como elixir
+augroup exs-filetype
+    autocmd!
+    autocmd BufRead,BufNewFile *.exs		set filetype=elixir
 augroup END
 
 
@@ -678,6 +685,17 @@ lua <<EOF
    capabilities = capabilities,
    on_attach = on_attach
  }
+ require'lspconfig'.elixirls.setup {
+   capabilities = capabilities,
+   cmd = { "/home/massolari/elixir-ls/language_server.sh" },
+   on_attach = on_attach,
+   settings = {
+     elixirLS = {
+       dialyzerEnabled = false,
+       suggestSpecs = false
+     }
+   }
+  }
 
 
  local saga = require 'lspsaga'
@@ -690,8 +708,8 @@ nnoremap <silent> <C-f> <cmd>lua require('lspsaga.hover').smart_scroll_hover(1)<
 nnoremap <silent> <C-b> <cmd>lua require('lspsaga.hover').smart_scroll_hover(-1)<CR>
 
 " Use <c-space> for trigger completion.
-imap <silent> <c-space> <Plug>(completion_trigger)
-" inoremap <silent> <c-space> 
+" imap <silent> <c-space> <Plug>(completion_trigger)
+inoremap <silent> <c-space> 
 
 vnoremap <leader>ca :lua require'fzf_lsp'.range_code_action_call{}<CR>
 
