@@ -633,6 +633,7 @@ lua <<EOF
    buf_set_keymap('n', '<leader>cd', "<cmd>lua require'fzf_lsp'.diagnostic_call{}<CR>", opts)
    buf_set_keymap('n', '<leader>cf', "<cmd>lua vim.lsp.buf.formatting_sync(nil, 1000)<CR>", opts)
    buf_set_keymap('n', '<leader>co', "<cmd>lua require'fzf_lsp'.document_symbol_call{}<CR>", opts)
+   buf_set_keymap('n', '<leader>cp', "<cmd>lua require'fzf_lsp'.workspace_symbol_call{}<CR>", opts)
    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
    buf_set_keymap('n', 'K', "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
@@ -664,14 +665,19 @@ lua <<EOF
        augroup END
      ]], false)
    end
-   if client.config.flags then
-     client.config.flags.allow_incremental_sync = true
-   end
  end
 
  local servers = { "jsonls", "tsserver", "vimls", "yamlls", "elmls" }
  for _, lsp in ipairs(servers) do
-   nvim_lsp[lsp].setup { on_attach = on_attach }
+   nvim_lsp[lsp].setup {
+       on_init = function(client)
+         client.config.flags = {}
+         if client.config.flags then
+           client.config.flags.allow_incremental_sync = true
+         end
+       end,
+       on_attach = on_attach
+   }
  end
 
  local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -700,6 +706,7 @@ lua <<EOF
 
  local saga = require 'lspsaga'
  saga.init_lsp_saga()
+ require('lspkind').init()
 EOF
 
 " scroll down hover doc
@@ -708,8 +715,8 @@ nnoremap <silent> <C-f> <cmd>lua require('lspsaga.hover').smart_scroll_hover(1)<
 nnoremap <silent> <C-b> <cmd>lua require('lspsaga.hover').smart_scroll_hover(-1)<CR>
 
 " Use <c-space> for trigger completion.
-" imap <silent> <c-space> <Plug>(completion_trigger)
-inoremap <silent> <c-space> 
+imap <silent> <c-space> <Plug>(completion_trigger)
+" inoremap <silent> <c-space> 
 
 vnoremap <leader>ca :lua require'fzf_lsp'.range_code_action_call{}<CR>
 

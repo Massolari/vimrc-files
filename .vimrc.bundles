@@ -101,3 +101,7 @@ Plug 'nvim-lua/lsp-status.nvim'
 
 " Comandos de LSP com fzf
 Plug 'gfanto/fzf-lsp.nvim'
+
+" Ícones no completion
+Plug 'onsails/lspkind-nvim'
+
