@@ -283,11 +283,7 @@ let g:which_key_map.s = {
             \ 'o' : 'Abrir',
             \ 's' : 'Salvar',
             \ }
-let g:which_key_map.t = {
-            \ 'name' : '+Terminal',
-            \ 'h' : 'Abrir horizontalmente',
-            \ 'v' : 'Abrir verticalmente',
-            \ }
+let g:which_key_map.t = 'Abrir terminal (suporte a count)'
 let g:which_key_map.v = 'dividir-tela-verticalmente'
 let g:which_key_map.w = {
             \ 'name' : '+Window/Wiki',
@@ -342,9 +338,7 @@ let g:indentLine_fileTypeExclude = ['markdown']
 let g:indentLine_bufTypeExclude = ['terminal']
 
 " Variáveis usadas para reutilizar o terminal
-let s:monkey_terminal_window = -1
-let s:monkey_terminal_buffer = -1
-let s:monkey_terminal_job_id = -1
+let s:current_terminal = 1
 
 " Não redimensionar janelas abertas ao abrir ou fechar janelas
 set noequalalways
@@ -442,59 +436,6 @@ endfunction
 " Função para pegar a branch atual
 function! GitBranch()
     return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
-
-" Reutilizar o mesmo terminal
-function! MonkeyTerminalOpen(location)
-    let l:position = 'L'
-    let l:resize = "vertical resize 70"
-    if (a:location == 'bottom')
-        let l:position = 'J'
-        let l:resize = "resize 15"
-    endif
-    " Check if buffer exists, if not create a window and a buffer
-    if !bufexists(s:monkey_terminal_buffer)
-        " Creates a window call monkey_terminal
-        new monkey_terminal
-        " Moves to the window the right the current one
-        :exe "wincmd" l:position
-        :exe l:resize
-        let s:monkey_terminal_job_id = termopen($SHELL, { 'detach': 1 })
-
-        " Change the name of the buffer to "Terminal 1"
-        silent file Terminal\ 1
-        " Gets the id of the terminal window
-        let s:monkey_terminal_window = win_getid()
-        let s:monkey_terminal_buffer = bufnr('%')
-
-        " The buffer of the terminal won't appear in the list of the buffers
-        " when calling :buffers command
-        set nobuflisted
-    elseif !win_gotoid(s:monkey_terminal_window)
-        sp
-        " Moves to the window below the current one
-        :exe "wincmd" l:position
-        :exe l:resize
-        buffer Terminal\ 1
-        " Gets the id of the terminal window
-        let s:monkey_terminal_window = win_getid()
-    endif
-    norm i
-endfunction
-
-function! MonkeyTerminalToggle(location)
-    if win_gotoid(s:monkey_terminal_window)
-        call MonkeyTerminalClose()
-    else
-        call MonkeyTerminalOpen(a:location)
-    endif
-endfunction
-
-function! MonkeyTerminalClose()
-    if win_gotoid(s:monkey_terminal_window)
-        " close the current window
-        hide
-    endif
 endfunction
 
 " Statusline
@@ -744,10 +685,8 @@ nnoremap <leader>gw :Gwrite<CR>
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
 
-" Abrir terminal em tela dividida
-" nnoremap <leader>th :below split +te<CR>
-nnoremap <leader>th :call MonkeyTerminalToggle('bottom')<CR>
-nnoremap <leader>tv :call MonkeyTerminalToggle('right')<CR>
+" Abrir terminal
+nnoremap <leader>t :<c-u>exe v:count1 . "ToggleTerm"<CR>
 
 " Toda a vez que pular para próxima palavra buscada o cursor fica no centro da tela
 nnoremap n nzzzv

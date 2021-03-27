@@ -105,3 +105,6 @@ Plug 'gfanto/fzf-lsp.nvim'
 " Ícones no completion
 Plug 'onsails/lspkind-nvim'
 
+" Alternador de terminal
+Plug 'akinsho/nvim-toggleterm.lua'
+
