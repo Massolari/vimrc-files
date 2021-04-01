@@ -84,11 +84,14 @@ Plug 'diepm/vim-rest-console'
 " LSP do Nvim
 Plug 'neovim/nvim-lspconfig'
 
-" TabNone
-Plug 'aca/completion-tabnine', { 'do': './install.sh' }
 
 " Autocompletion framework for built-in LSP
-Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/nvim-compe'
+" Plug 'nvim-lua/completion-nvim'
+
+" TabNine
+" Plug 'aca/completion-tabnine', { 'do': './install.sh' }
+Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
 
 " Plugin LSP com base no cliente lsp do neovim
 Plug 'glepnir/lspsaga.nvim'

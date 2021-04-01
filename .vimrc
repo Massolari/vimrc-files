@@ -356,19 +356,11 @@ set shortmess+=c
 set signcolumn=yes
 
 " Autocomplete melhor
-set completeopt=menuone,noinsert,noselect
-"
-" Tabnine
-let g:completion_chain_complete_list = {
-    \ 'default': [
-    \    {'complete_items': ['lsp', 'snippet', 'tabnine' ]},
-    \    {'mode': '<c-p>'},
-    \    {'mode': '<c-n>'}
-    \]
-\}
+set completeopt=menuone,noselect
 
-" Tecla de confirmação de autocomplete
-let g:completion_confirm_key = "\<C-y>"
+" Configurar o lexima com o compe
+let g:lexima_no_default_rules = v:true
+call lexima#set_default_rules()
 
 "*****************************************************************************
 "" Comandos
@@ -518,12 +510,6 @@ augroup format-on-save
     autocmd BufWrite * silent! lua vim.lsp.buf.formatting_sync(nil, 1000)
 augroup END
 
-" Autocomplete
-augroup auto-complete
-    autocmd!
-    autocmd BufEnter * lua require'completion'.on_attach()
-augroup END
-
 " Reconhecer .exs como elixir
 augroup exs-filetype
     autocmd!
@@ -565,8 +551,6 @@ lua <<EOF
 
    lsp_status.on_attach(client)
    client.config.capabilities = vim.tbl_extend('keep', client.config.capabilities or {}, lsp_status.capabilities)
-
-   require'completion'.on_attach(client)
 
    -- Mappings.
    local opts = { noremap=true, silent=true }
@@ -622,7 +606,6 @@ lua <<EOF
  end
 
  local capabilities = vim.lsp.protocol.make_client_capabilities()
- capabilities.textDocument.completion.completionItem.snippetSupport = true
 
  require'lspconfig'.html.setup {
    capabilities = capabilities,
@@ -644,6 +627,17 @@ lua <<EOF
    }
   }
 
+ require'compe'.setup {
+   source = {
+     path = true;
+     buffer = true;
+     calc = true;
+     nvim_lsp = true;
+     nvim_lua = true;
+     tabnine = true;
+     vsnip = false;
+   };
+ }
 
  local saga = require 'lspsaga'
  saga.init_lsp_saga()
@@ -656,8 +650,9 @@ nnoremap <silent> <C-f> <cmd>lua require('lspsaga.hover').smart_scroll_hover(1)<
 nnoremap <silent> <C-b> <cmd>lua require('lspsaga.hover').smart_scroll_hover(-1)<CR>
 
 " Use <c-space> for trigger completion.
-imap <silent> <c-space> <Plug>(completion_trigger)
-" inoremap <silent> <c-space> 
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <C-y> compe#confirm(lexima#expand('<LT>CR>', 'i'))
+inoremap <silent><expr> <C-e> compe#close('<C-e>')
 
 vnoremap <leader>ca :lua require'fzf_lsp'.range_code_action_call{}<CR>
 
