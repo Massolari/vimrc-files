@@ -351,9 +351,9 @@ let g:bubbly_symbols = {
     \ 'lsp_status': {
         \ 'diagnostics': {
             \ 'error': '%d',
-            \ 'warning': '%d.',
-            \ 'hint': '❗ %d.',
-            \ 'info': '🛈%d.',
+            \ 'warning': '%d',
+            \ 'hint': '❗%d',
+            \ 'info': '🛈%d',
             \ }
         \ }
     \ }
@@ -626,13 +626,13 @@ lua <<EOF
    buf_set_keymap('n', '<leader>co', "<cmd>lua require'fzf_lsp'.document_symbol_call{}<CR>", opts)
    buf_set_keymap('n', '<leader>cp', "<cmd>lua require'fzf_lsp'.workspace_symbol_call{}<CR>", opts)
    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-   buf_set_keymap('n', 'K', "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
+   buf_set_keymap('n', 'K', "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
    buf_set_keymap('n', '<leader>cs', "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", opts)
    buf_set_keymap('n', 'gy', "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
    buf_set_keymap('n', '<leader>cr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
    buf_set_keymap('n', 'gr', "<cmd>lua require'fzf_lsp'.references_call{}<CR>", opts)
-   buf_set_keymap('n', '<leader>ce', "<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>", opts)
+   buf_set_keymap('n', '<leader>ce', "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
    buf_set_keymap('n', '[d', "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>", opts)
    buf_set_keymap('n', ']d', "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", opts)
 
@@ -701,7 +701,15 @@ lua <<EOF
 
  local saga = require 'lspsaga'
  saga.init_lsp_saga()
+
  require('lspkind').init()
+
+ require'nvim-treesitter.configs'.setup {
+   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+   highlight = {
+     enable = true,              -- false will disable the whole extension
+   },
+ }
 EOF
 
 " scroll down hover doc

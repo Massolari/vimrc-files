@@ -11,7 +11,8 @@ else
 endif
 
 " Sintasse para várias linguagens
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
 " Exibe espaços vazios no final da linha
 Plug 'bronson/vim-trailing-whitespace'
