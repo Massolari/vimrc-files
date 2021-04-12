@@ -336,13 +336,30 @@ let g:bubbly_colors = {
         \ 'inactive': { 'background': 'lightgrey', 'foreground' : 'foreground' },
         \ 'close': 'darkgrey'
         \ },
+    \ 'lsp_status': {
+        \ 'diagnostics': {
+            \ 'warning': { 'background': 'gruvboxyellow', 'foreground': 'foreground' },
+            \ 'hint': '❗ %d.',
+            \ 'info': '🛈%d.',
+            \ }
+        \ }
     \ }
 
+let g:bubbly_symbols = {
+    \ 'lsp_status': {
+        \ 'diagnostics': {
+            \ 'error': '%d',
+            \ 'warning': '%d.',
+            \ 'hint': '❗ %d.',
+            \ 'info': '🛈%d.',
+            \ }
+        \ }
+    \ }
 let g:bubbly_statusline = [
     \ 'mode',
     \ 'truncate',
-    \ 'path',
     \ 'branch',
+    \ 'path',
     \ 'signify',
     \ 'lsp_status.diagnostics',
     \ 'lsp_status.messages',
@@ -474,11 +491,6 @@ function! LListToggle()
         lopen 10
         let g:llist_win = bufnr("$")
     endif
-endfunction
-
-" Função para pegar a branch atual
-function! GitBranch()
-    return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 endfunction
 
 " Statusline
