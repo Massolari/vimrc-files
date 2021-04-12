@@ -41,7 +41,7 @@ Plug 'cohama/lexima.vim'
 Plug 'tpope/vim-surround'
 
 " Autocomplete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Habilita o uso do % em tags HTML/XML, if/else entre outros blocos
 if !has('nvim')
@@ -61,7 +61,9 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 
 " Engine de snippets
-Plug 'SirVer/ultisnips'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+" Plug 'SirVer/ultisnips'
 
 " Biblioteca de snippets
 Plug 'honza/vim-snippets'
@@ -73,15 +75,44 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'metakirby5/codi.vim'
 
 " Status bar
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
+Plug 'datwaft/bubbly.nvim'
 
 " Guia de atalhos
 Plug 'liuchengxu/vim-which-key'
 
+" Cliente REST
 Plug 'diepm/vim-rest-console'
 
 " LSP do Nvim
-" Plug 'neovim/nvim-lspconfig'
+Plug 'neovim/nvim-lspconfig'
 
-" TabNone
-" Plug 'codota/tabnine-vim'
+
+" Autocompletion framework for built-in LSP
+Plug 'hrsh7th/nvim-compe'
+" Plug 'nvim-lua/completion-nvim'
+
+" TabNine
+" Plug 'aca/completion-tabnine', { 'do': './install.sh' }
+Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
+
+" Plugin LSP com base no cliente lsp do neovim
+Plug 'glepnir/lspsaga.nvim'
+
+" Ícones
+Plug 'ryanoasis/vim-devicons'
+
+" Informações de LSP na statusline
+Plug 'nvim-lua/lsp-status.nvim'
+
+" Comandos de LSP com fzf
+Plug 'gfanto/fzf-lsp.nvim'
+
+" Ícones no completion
+Plug 'onsails/lspkind-nvim'
+
+" Alternador de terminal
+Plug 'akinsho/nvim-toggleterm.lua'
+
+" Palenight
+Plug 'drewtempelmeyer/palenight.vim'
