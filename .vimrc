@@ -336,9 +336,13 @@ let g:bubbly_colors = {
         \ 'inactive': { 'background': 'lightgrey', 'foreground' : 'foreground' },
         \ 'close': 'darkgrey'
         \ },
+    \ 'builtinlsp': {
+        \ 'current_function': { 'background': 'darkblue', 'foreground': 'white' }
+    \ },
     \ 'lsp_status': {
         \ 'diagnostics': {
             \ 'warning': { 'background': 'gruvboxyellow', 'foreground': 'foreground' },
+            \ 'hint': { 'background': 'darkblue', 'foreground': 'white' },
             \ }
         \ }
     \ }
