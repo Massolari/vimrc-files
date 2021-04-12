@@ -359,6 +359,7 @@ let g:bubbly_statusline = [
     \ 'branch',
     \ 'path',
     \ 'signify',
+    \ 'builtinlsp.current_function',
     \ 'lsp_status.diagnostics',
     \ 'lsp_status.messages',
     \ 'divisor',
