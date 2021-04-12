@@ -339,8 +339,6 @@ let g:bubbly_colors = {
     \ 'lsp_status': {
         \ 'diagnostics': {
             \ 'warning': { 'background': 'gruvboxyellow', 'foreground': 'foreground' },
-            \ 'hint': '❗ %d.',
-            \ 'info': '🛈%d.',
             \ }
         \ }
     \ }
