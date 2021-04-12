@@ -61,7 +61,9 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 
 " Engine de snippets
-Plug 'SirVer/ultisnips'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+" Plug 'SirVer/ultisnips'
 
 " Biblioteca de snippets
 Plug 'honza/vim-snippets'
@@ -73,7 +75,8 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'metakirby5/codi.vim'
 
 " Status bar
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
+Plug 'datwaft/bubbly.nvim'
 
 " Guia de atalhos
 Plug 'liuchengxu/vim-which-key'
@@ -111,3 +114,5 @@ Plug 'onsails/lspkind-nvim'
 " Alternador de terminal
 Plug 'akinsho/nvim-toggleterm.lua'
 
+" Palenight
+Plug 'drewtempelmeyer/palenight.vim'

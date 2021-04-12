@@ -192,15 +192,15 @@ let g:ale_linters_ignore = {'typescript': ['eslint']}
 let g:ale_fix_on_save=1
 
 " Branch do git na statusbar
-let g:lightline = {
-            \     'active': {
-            \         'left': [ ['mode', 'paste'], ['gitbranch', 'lspstatus', 'method', 'readonly', 'relativepath', 'modified'] ]
-            \ },
-            \     'component_function': {
-            \         'gitbranch': 'fugitive#head',
-            \         'lspstatus': 'LspStatus'
-            \     }
-            \ }
+" let g:lightline = {
+"             \     'active': {
+"             \         'left': [ ['mode', 'paste'], ['gitbranch', 'lspstatus', 'method', 'readonly', 'relativepath', 'modified'] ]
+"             \ },
+"             \     'component_function': {
+"             \         'gitbranch': 'fugitive#head',
+"             \         'lspstatus': 'LspStatus'
+"             \     }
+"             \ }
 
 " Configuração do which-key
 call which_key#register('<Space>', "g:which_key_map")
@@ -299,6 +299,57 @@ colorscheme gruvbox
 " Sobrescrevendo cor do quick-scope porque ela some no tema do vscode
 highlight QuickScopePrimary guifg='#7a7608'
 highlight QuickScopeSecondary guifg='#e27bed'
+
+" Configuração da statusbar
+let g:bubbly_palette = {
+    \ 'background': 'NONE',
+    \ 'foreground': 'Black',
+    \ 'brightgreen': '#afdf00',
+    \ 'darkblue': '#0087af',
+    \ 'brightred': '#df0000',
+    \ 'lightpurple': '#fd99ff',
+    \ 'gruvboxyellow': '#b8bb26',
+    \ 'gruvboxgray': '#665f4e',
+    \ 'gruvboxgreen': '#8ec07c',
+    \ 'gruvboxorange': '#fabd2f',
+    \ }
+
+let g:bubbly_colors = {
+    \ 'mode': {
+        \ 'normal': { 'background': 'brightgreen', 'foreground': 'black' },
+        \ 'insert': { 'background': 'white', 'foreground': 'darkblue' },
+        \ 'visual': { 'background': 'brightred', 'foreground': 'white' },
+        \ 'visualblock': { 'background': 'brightred', 'foreground': 'white' },
+        \ 'command': { 'background': 'brightred', 'foreground': 'white' },
+        \ 'replace': { 'background': 'yellow', 'foreground': 'black' },
+        \ },
+    \ 'path': {
+        \ 'readonly': { 'background' : 'lightgrey', 'foreground' : 'foreground' },
+        \ 'unmodifiable': { 'background' : 'darkgrey', 'foreground' : 'foreground' },
+        \ 'path': { 'background' : 'white', 'foreground' : 'black' },
+        \ 'modified': { 'background' : 'lightgrey', 'foreground' : 'foreground' },
+        \ },
+    \ 'branch': { 'background': 'gruvboxgreen', 'foreground': 'gruvboxgray' },
+    \ 'filetype': { 'background': 'gruvboxorange', 'foreground': 'foreground' },
+    \ 'tabline': {
+        \ 'active': { 'background': 'white', 'foreground' : 'foreground' },
+        \ 'inactive': { 'background': 'lightgrey', 'foreground' : 'foreground' },
+        \ 'close': 'darkgrey'
+        \ },
+    \ }
+
+let g:bubbly_statusline = [
+    \ 'mode',
+    \ 'truncate',
+    \ 'path',
+    \ 'branch',
+    \ 'signify',
+    \ 'lsp_status.diagnostics',
+    \ 'lsp_status.messages',
+    \ 'divisor',
+    \ 'filetype',
+    \ 'progress'
+    \ ]
 
 " Realçar linha onde o cursor está
 set cursorline
@@ -592,9 +643,13 @@ lua <<EOF
    end
  end
 
- local servers = { "jsonls", "tsserver", "vimls", "yamlls", "elmls" }
+ local servers = { "cssls", "html", "jsonls", "tsserver", "vimls", "yamlls", "elmls" }
+
+ local capabilities = vim.lsp.protocol.make_client_capabilities()
+ capabilities.textDocument.completion.completionItem.snippetSupport = true
  for _, lsp in ipairs(servers) do
    nvim_lsp[lsp].setup {
+       capabilities = capabilities,
        on_init = function(client)
          client.config.flags = {}
          if client.config.flags then
@@ -605,16 +660,6 @@ lua <<EOF
    }
  end
 
- local capabilities = vim.lsp.protocol.make_client_capabilities()
-
- require'lspconfig'.html.setup {
-   capabilities = capabilities,
-   on_attach = on_attach
- }
- require'lspconfig'.cssls.setup {
-   capabilities = capabilities,
-   on_attach = on_attach
- }
  require'lspconfig'.elixirls.setup {
    capabilities = capabilities,
    cmd = { "/home/massolari/elixir-ls/language_server.sh" },
@@ -653,7 +698,9 @@ nnoremap <silent> <C-b> <cmd>lua require('lspsaga.hover').smart_scroll_hover(-1)
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <C-y> compe#confirm(lexima#expand('<LT>CR>', 'i'))
 inoremap <silent><expr> <C-e> compe#close('<C-e>')
+inoremap <silent>  <CR>
 
+" Code action
 vnoremap <leader>ca :lua require'fzf_lsp'.range_code_action_call{}<CR>
 
 " Gerencias sessões
