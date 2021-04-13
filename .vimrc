@@ -350,10 +350,10 @@ let g:bubbly_colors = {
 let g:bubbly_symbols = {
     \ 'lsp_status': {
         \ 'diagnostics': {
-            \ 'error': '%d',
-            \ 'warning': '%d',
-            \ 'hint': '❗%d',
-            \ 'info': '🛈%d',
+            \ 'error': ' %d',
+            \ 'warning': ' %d',
+            \ 'hint': '❗ %d',
+            \ 'info': '🛈 %d',
             \ }
         \ }
     \ }
