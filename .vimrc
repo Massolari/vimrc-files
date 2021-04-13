@@ -636,6 +636,9 @@ lua <<EOF
    buf_set_keymap('n', '[d', "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>", opts)
    buf_set_keymap('n', ']d', "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", opts)
 
+   -- buf_set_keymap('n', '<leader>ce', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "single" })<CR>', opts)
+   -- buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_next({ popup_opts = { border = "single" }})<CR>', opts)
+   -- buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_prev({ popup_opts = { border = "single" }})<CR>', opts)
    -- Set some keybinds conditional on server capabilities
    if client.resolved_capabilities.document_formatting then
      buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
@@ -705,7 +708,7 @@ lua <<EOF
  require('lspkind').init()
 
  require'nvim-treesitter.configs'.setup {
-   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+   ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
    highlight = {
      enable = true,              -- false will disable the whole extension
    },
@@ -719,9 +722,9 @@ nnoremap <silent> <C-b> <cmd>lua require('lspsaga.hover').smart_scroll_hover(-1)
 
 " Use <c-space> for trigger completion.
 inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <C-y> compe#confirm(lexima#expand('<LT>CR>', 'i'))
+inoremap <silent><expr> <C-y> compe#confirm()
 inoremap <silent><expr> <C-e> compe#close('<C-e>')
-inoremap <silent>  <CR>
+inoremap <silent><expr>   lexima#expand('<LT>CR>', 'i')
 
 " Code action
 vnoremap <leader>ca :lua require'fzf_lsp'.range_code_action_call{}<CR>

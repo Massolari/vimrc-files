@@ -64,7 +64,7 @@ Plug 'tpope/vim-fugitive'
 " Engine de snippets
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 
 " Biblioteca de snippets
 Plug 'honza/vim-snippets'
