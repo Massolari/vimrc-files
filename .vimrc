@@ -717,7 +717,7 @@ lua <<EOF
 
  require"toggleterm".setup{
    open_mapping = [[<c-\>]],
-   start_in_insert = true,
+   shade_terminals = false,
    direction = 'horizontal'
  }
 EOF
